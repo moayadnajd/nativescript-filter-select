@@ -101,7 +101,6 @@ margin-top: 8;
 ### CSS core-theme styles if you dont have them just make your own 
 ```CSS
 
-
 .action-bar-title{
 
 }
