@@ -40,7 +40,7 @@ see demo for more info
 
 Sample 1 |  Sample 2
 -------- | ---------
-![Sample1](screenshots/ios.filterselect.gif) | ![Sample2](screenshots/ios.filterselect.gif)
+![Sample1](screenshots/ios-filter-select.gif) | ![Sample2](screenshots/ios-filter-select.gif)
 
 ### CSS
 ```CSS
