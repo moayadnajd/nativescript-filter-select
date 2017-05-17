@@ -1,95 +1,141 @@
-# Develop a NativeScript plugin
+# nativeScript-filter-select
+# NativeScript filter select 
 
-## Getting started
+A NativeScript plugin to provide an listview widget to select AND filter items.
 
-1. `git clone https://github.com/NathanWalker/nativescript-plugin-seed.git myplugin`
-2. `cd myplugin`
-3. `npm run postclone`
-4. `npm run setup`
-5. Get to work.
 
-This seed expands on several things [presented here](http://developer.telerik.com/featured/creating-nativescript-plugins-in-typescript/).
+## Installation
 
-## Usage
+##### NativeScript 2.x
+- `tns plugin add nativescript-filter-select`
 
-The seed is prepared to allow you to test and try out your plugin via the `demo` folder.
-Additionally it provides a proper `.gitignore` to keep GitHub tidy as well as `.npmignore` to ensure everyone is happy when you publish your plugin via npm.
 
-### Linking to CocoaPod or Android Arsenal plugins
+*Be sure to run a new build after adding plugins to avoid any issues
+## Vanilla NativeScript
 
-You will want to create these folders and files in the root:
+ <span style="color:red">IMPORTANT: </span>*Make sure you include `xmlns:FS="nativescript-filter-select"` on the Page element*
 
-```
-platforms --
-  ios --
-    Podfile
-  android --
-    include.gradle
-```
-
-Doing so will open up those native apis to your plugin :)
-
-Take a look at these existing plugins for how that can be done very simply:
-
-* [nativescript-cardview](https://github.com/bradmartin/nativescript-cardview/tree/master/platforms)
-* [nativescript-floatingactionbutton](https://github.com/bradmartin/nativescript-floatingactionbutton/tree/master/platforms)
-
-### Typical development workflow:
-
-1. Make changes to plugin files
-2. Make changes in `demo` that would test those changes out
-3. `npm run demo.ios` or `npm run demo.android`  **(must be run from the root directory)**
-
-Those `demo` tasks are just general helpers. You may want to have more granular control on the device and/or emulator you want to run. For that, you can just run things the manual way:
-
-```
-cd demo
-
-// when developing, to ensure the latest code is built into the demo, it's a guarantee to remove the plugin and add it back
-tns plugin remove nativescript-filter-select
-tns plugin add ..
-
-// manual platform adds
-tns platform add ios
-// and/or
-tns platform add android
+### XML
+```XML
+<Page xmlns:Card="nativescript-filterselect">
+   <StackLayout>     
+     <FS:FilterSelect 
+     items="{{ countries }}"
+     hint="Please select some countries" 
+     modal_title="Countries" search_param="name" 
+     primary_key="code" 
+     onSelect="{{ onSelect }}"
+     />
+   </StackLayout>
+</Page>
 ```
 
-Then use any of the available options from the `tns` command line:
+## Attributes
+see demo for more info 
 
-* [Emulate your project](https://github.com/NativeScript/nativescript-cli#emulate-your-project)
-* [Run your project](https://github.com/NativeScript/nativescript-cli#run-your-project)
-* [Full list of commands](https://github.com/NativeScript/nativescript-cli#the-commands)
 
-## Unittesting
-This plugin automatically adds Jasmine-based unittest support to your plugin.
-Open `demo/app/tests/tests.js` and adjust its contents.
+## Sample Screenshots
 
-You can read more about this topic [here](https://docs.nativescript.org/tooling/testing).
+#### Android and ios
 
-Once you're ready to test your plugin's API execute one of these commands in the plugin root:
+Sample 1 |  Sample 2
+-------- | ---------
+![Sample1](screenshots/ios.filterselect.gif) | ![Sample2](screenshots/ios.filterselect.gif)
 
+### CSS
+```CSS
+FilterSelect{
+    border-style: solid;
+    padding: 3;
+    border-width: 1;
+    border-color: #ccc;
+    border-radius: 5; 
+}
+.btn-filter-select{
+   vertical-align: middle;
+   align-content: center;
+   margin: 0;
+   padding: 1;
+}
+.filter-select-tag{
+   
+    margin-left: 8;
+    border-width: 1;
+    border-color: #ccc;
+    border-radius: 5; 
+    padding: 6;
+    
+}
+.felter-select-list label{
+  padding: 20;
+}
+
+.felter-select-list{
+  margin: 2;
+}
+.filter-select-hint{
+vertical-align: middle;
+text-align: center;
+margin-top: 8;
+}
+
+.filter-select-selected{
+    border-width: 1;
+    border-color: green;
+}
+// below core-theme styles if you dont have them just make your own 
+.filter-select-tags-holder{
+}
+
+.filter-select{
+   
+}
+
+
+.base-filter-select{
+}
+
+.btn-filter-select{
+}
+
+.base-filter-select{
+
+}
+
+.action-bar-title{
+
+}
+
+.text-center{
+
+}
+.text-left{
+
+}
+.text-right{
+
+}
+
+.action-bar{
+
+}
+
+.p-10{
+
+}
+
+.hr-light{
+
+}
+
+.btn{
+
+} 
+
+.btn-primary{
+    
+}
 ```
-npm run test.ios
-npm run test.android
-```
 
-## Publish
 
-When you have everything ready to publish:
 
-* Bump the version number in `package.json`
-* `npm run build` - **very important** - ensure the latest is built **before** you publish
-* `npm publish`
-
-## Contributing - Want to make the seed better?
-
-Or at least help keep it up to date with NativeScript releases, which would be excellent.
-
-```
-npm install -g typescript  // if you don't already have it
-git clone https://github.com/NathanWalker/nativescript-plugin-seed
-cd nativescript-plugin-seed
-
-// Improve!
-```
