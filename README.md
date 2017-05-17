@@ -83,13 +83,9 @@ margin-top: 8;
     border-width: 1;
     border-color: green;
 }
-// below core-theme styles if you dont have them just make your own 
 .filter-select-tags-holder{
 }
 
-.filter-select{
-   
-}
 
 
 .base-filter-select{
@@ -101,6 +97,10 @@ margin-top: 8;
 .base-filter-select{
 
 }
+```
+### CSS core-theme styles if you dont have them just make your own 
+```CSS
+
 
 .action-bar-title{
 
