@@ -40,7 +40,7 @@ see demo for more info
 
 Sample 1 |  Sample 2
 -------- | ---------
-![Sample1](screenshots/android-filter-select.gif) | ![Sample2](screenshots/ios-filter-select.gif)
+![Sample1](https://raw.githubusercontent.com/moayadnajd/nativescript-filter-select/master/screenshots/android-filter-select.gif) | ![Sample2](https://raw.githubusercontent.com/moayadnajd/nativescript-filter-select/master/screenshots/ios-filter-select.gif)
 
 ### CSS
 ```CSS
