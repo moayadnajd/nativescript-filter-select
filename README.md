@@ -17,7 +17,7 @@ A NativeScript plugin to provide an listview widget to select AND filter items.
 
 ### XML
 ```XML
-<Page xmlns:Card="nativescript-filterselect">
+<Page xmlns:FS="nativescript-filter-select">
    <StackLayout>     
      <FS:FilterSelect 
      items="{{ countries }}"

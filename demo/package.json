@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "nativescript-filter-select": "file:///Users/moayad/Documents/mobile/nativescript-filter-select",
+    "nativescript-filter-select": "^1.0.1",
     "nativescript-image-cache-media": "^1.0.6",
     "nativescript-theme-core": "^1.0.2",
     "nativescript-unit-test-runner": "^0.3.4",
