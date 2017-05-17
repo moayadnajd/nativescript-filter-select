@@ -1,7 +1,48 @@
-export declare class Common {
-    message: string;
+import { GridLayout } from "ui/layouts/grid-layout";
+import { FlexboxLayout } from "ui/layouts/flexbox-layout";
+import { ObservableArray } from "data/observable-array";
+export declare class Common extends GridLayout {
+    private _items;
+    private _selected;
+    private _selected_items;
+    private _selected_layout;
+    private _primary_key;
+    private _gridBase;
+    private _onSelect;
+    private _search_param;
+    private _item_template;
+    private _filterd;
+    private _term;
+    private _lastTerm;
+    private filterselect;
+    private _modal_title;
+    private _hint;
+    private _selected_flag;
+    private _multiple;
+    multiple: boolean;
+    selected_flag: string;
+    search_param: string;
+    filterd: ObservableArray<any>;
+    term: string;
+    item_template: any;
+    onSelect: any;
+    gridBase: any;
+    selected_layout: any;
+    private modalPage;
+    modal_title: string;
+    hint: string;
+    private closeCallback;
+    selected_items: Array<any>;
+    items: any[];
+    primary_key: any;
+    selected: any[];
+    onLoaded(): void;
     constructor();
-}
-export declare class Utils {
-    static SUCCESS_MSG(): string;
+    renderTags(): FlexboxLayout;
+    private init();
+    private doneSelect();
+    private modal();
+    private initSelectFilter();
+    onSubmit(): void;
+    private listnToSearch();
 }

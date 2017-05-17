@@ -1,5 +1,31 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page">
+<Page 
+  xmlns="http://schemas.nativescript.org/tns.xsd" 
+  xmlns:FS="nativescript-filter-select"
+  xmlns:IM="nativescript-image-cache-media"
+   loaded="pageLoaded" class="page">
+   <ScrollView>
   <StackLayout class="p-20">
-    <Label text="{{ message }}" class="t-20 text-center c-black" textWrap="true"/>
+  
+     <Label class="h2" text="select default" textWrap="true" />
+     <StackLayout class="hr-light m-10" />
+     <FS:FilterSelect items="{{ countries }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code" onSelect="{{ onSelect }}" />
+     
+    
+     <Label class="m-t-20 h2" text="Select with pre selected items" textWrap="true" />
+     <StackLayout class="hr-light m-10" />
+     <FS:FilterSelect  items="{{ countries }}" selected="{{ selected }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code" onSelect="{{ onSelect }}" />
+   
+  
+    <Label class="m-t-20 h2" text="Select with listview Template" textWrap="true" />
+    <StackLayout class="hr-light m-10" />
+    <FS:FilterSelect items="{{ countries }}" item_template="{{ item_template }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code" onSelect="{{ onSelect }}" />
+    
+   
+    <Label class="m-t-20 h2" text="Select with single option" textWrap="true" />
+    <StackLayout class="hr-light m-10" />
+    <FS:FilterSelect multiple="false"  items="{{ countries }}" item_template="{{ item_template }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code" onSelect="{{ onSelect }}" />
+
+ 
   </StackLayout>
+  </ScrollView>
 </Page>

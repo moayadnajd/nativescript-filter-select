@@ -1,1 +1,92 @@
 ﻿@import 'nativescript-theme-core/css/core.light.css';
+FilterSelect{
+    border-style: solid;
+    padding: 3;
+    border-width: 1;
+    border-color: #ccc;
+    border-radius: 5; 
+}
+.btn-filter-select{
+   vertical-align: middle;
+   align-content: center;
+   margin: 0;
+   padding: 1;
+}
+.filter-select-tag{
+   
+    margin-left: 8;
+    border-width: 1;
+    border-color: #ccc;
+    border-radius: 5; 
+    padding: 6;
+    
+}
+.felter-select-list label{
+  padding: 20;
+}
+
+.felter-select-list{
+  margin: 2;
+}
+.filter-select-hint{
+vertical-align: middle;
+text-align: center;
+margin-top: 8;
+}
+
+.filter-select-selected{
+    border-width: 1;
+    border-color: green;
+}
+
+.filter-select-tags-holder{
+}
+
+.filter-select{
+   
+}
+
+
+.base-filter-select{
+}
+
+.btn-filter-select{
+}
+
+.base-filter-select{
+
+}
+
+.action-bar-title{
+
+}
+
+.text-center{
+
+}
+.text-left{
+
+}
+.text-right{
+
+}
+
+.action-bar{
+
+}
+
+.p-10{
+
+}
+
+.hr-light{
+
+}
+
+.btn{
+
+} 
+
+.btn-primary{
+    
+}
