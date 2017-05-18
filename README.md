@@ -42,7 +42,7 @@ Sample 1 |  Sample 2
 ## Attributes
 
 | Attribute | Description                    |   Default |
-| ------------- | ------------------------------ |
+| ------------- | ------------------------------ |--------
 |   multiple    | to limit the options selected to one if set to false       | boolean : true
 | selected_flag   | index of selected boolean flag to mark item as selected     | boolean : optional 
 |search_param| index  of the string value in the items object to search on it  |string : name
@@ -53,8 +53,6 @@ Sample 1 |  Sample 2
 |items|array of objects to populate the list of options | Array :[]
 |primary_key|unique index of the items object | string : `id`
 |selected|array of objects to mark some options as selected and it will be the result when select is done | Array: []
-
-
 
 ### CSS
 ```CSS
