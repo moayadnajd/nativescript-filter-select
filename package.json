@@ -1,6 +1,6 @@
 {
   "name": "nativescript-filter-select",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Your awesome NativeScript plugin for select and filter items for a list.",
   "main": "filter-select",
   "typings": "index.d.ts",
@@ -33,7 +33,12 @@
     "NativeScript",
     "JavaScript",
     "Android",
-    "iOS"
+    "iOS",
+    "filter",
+    "select",
+    "CodeObia",
+    "tags",
+    "search"
   ],
   "author": {
     "name": "Moayad Al-Najdawi",
