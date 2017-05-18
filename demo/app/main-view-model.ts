@@ -36,9 +36,9 @@ export class HelloWorldModel extends Observable {
 
   public item_template = '<GridLayout class="item" columns="100,*,100"> <IM:ImageCacheMedia  col="0" xmlns:IM="nativescript-image-cache-media" placeholder="~/icon.png" width="90" height="60" imageUri="{{ flags(code) }}"/>  <Label col="1" class="text-center" text="{{ name }}" textWrap="true" /> <Label col="2" class="text-center" text="{{ code }}" textWrap="true" /> </GridLayout>';
 
-  public onSelect(selectedArray) {
+  public onSelect(selectedArray,slef) {
     console.log('selected array is => ' + JSON.stringify(selectedArray));
-    console.log('selected array is => ' + JSON.stringify(this.selected));
+    console.log('selected array is => ' + JSON.stringify(slef.selected));
   }
 
   constructor() {

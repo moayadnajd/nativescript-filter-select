@@ -45,7 +45,7 @@ export class Common extends GridLayout {
   private _filterd: ObservableArray<any> = new ObservableArray(this.items);
   private _term: string = '';
   private _lastTerm: string = null;
-
+  private currentPage=null;
   private filterselect: any;
   private _modal_title: string = "Please select items";
   private _hint: string = "Please select some items";
@@ -226,8 +226,8 @@ export class Common extends GridLayout {
     button.text = 'Select';
     button.className = "btn btn-primary btn-filter-select";
     button.on(Button.tapEvent, function (eventData) {
-      var currentPage = frame.topmost().currentPage;
-      currentPage.showModal(self.modal(), '', function closeCallback() {
+      self.currentPage = frame.topmost().currentPage;
+      self.currentPage.showModal(self.modal(), '', function closeCallback() {
       }, true);
     }, this);
     if (self.selected_flag)
@@ -287,9 +287,9 @@ export class Common extends GridLayout {
     self.closeCallback();
     if (self.onSelect)
       if (this.multiple)
-        self.onSelect(self.selected);
+        self.onSelect(self.selected,self.currentPage.bindingContext);
       else
-        self.onSelect(self.selected[0]);
+        self.onSelect(self.selected[0],self.currentPage.bindingContext);
 
   }
   private modal() {
@@ -299,6 +299,9 @@ export class Common extends GridLayout {
 
 
     var self = this;
+
+   
+
     var stackLayout = new StackLayout();
     var gridLayout = new GridLayout();
     var listView = new ListView();
