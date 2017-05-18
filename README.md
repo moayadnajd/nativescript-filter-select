@@ -30,9 +30,6 @@ A NativeScript plugin to provide an listview widget to select AND filter items.
 </Page>
 ```
 
-## Attributes
-see demo for more info 
-
 
 ## Sample Screenshots
 
@@ -41,6 +38,23 @@ see demo for more info
 Sample 1 |  Sample 2
 -------- | ---------
 ![Sample1](http://codeobia.com/screenshots/android-filter-select.gif) | ![Sample2](http://codeobia.com/screenshots/ios-filter-select.gif)
+
+## Attributes
+
+| Attribute | Description                    |   Default |
+| ------------- | ------------------------------ |
+|   multiple    | to limit the options selected to one if set to false       | boolean : true
+| selected_flag   | index of selected boolean flag to mark item as selected     | boolean : optional 
+|search_param| index  of the string value in the items object to search on it  |string : name
+|item_template|xml template for the listview items | string : `<Label col="0" text="{{ ${this._search_param} }}" textWrap="true" />`
+|onSelect| on select function treger when select done | function : optional `onSelect(selectedArray,bindingcontextObject)`
+|modal_title|title of the filter modal | String : `Please select items`
+|hint|string to show when no items selected |`Please select some items`
+|items|array of objects to populate the list of options | Array :[]
+|primary_key|unique index of the items object | string : `id`
+|selected|array of objects to mark some options as selected and it will be the result when select is done | Array: []
+
+
 
 ### CSS
 ```CSS
