@@ -12,6 +12,16 @@ FilterSelect{
    margin: 0;
    padding: 1;
 }
+
+.filter-select-tag-delete{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    height:20;
+    width: 20;
+    text-align: center;
+    border-color: white;
+}
 .filter-select-tag{
    
     margin-left: 8;

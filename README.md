@@ -98,7 +98,15 @@ margin-top: 8;
 .filter-select-tags-holder{
 }
 
-
+.filter-select-tag-delete{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    height:20;
+    width: 20;
+    text-align: center;
+    border-color: white;
+}
 
 .base-filter-select{
 }

@@ -1,3 +1,4 @@
+import { AbsoluteLayout } from 'tns-core-modules/ui/layouts/absolute-layout/absolute-layout';
 import { Observable } from 'data/observable';
 import * as app from 'application';
 import { LayoutBase } from "ui/layouts/layout-base";
@@ -45,7 +46,7 @@ export class Common extends GridLayout {
   private _filterd: ObservableArray<any> = new ObservableArray(this.items);
   private _term: string = '';
   private _lastTerm: string = null;
-  private currentPage=null;
+  private currentPage = null;
   private filterselect: any;
   private _modal_title: string = "Please select items";
   private _hint: string = "Please select some items";
@@ -195,10 +196,33 @@ export class Common extends GridLayout {
     flexboxLayout.flexGrow = 1;
     if (this.selected.length)
       this.selected.forEach((item) => {
+        var grid = new GridLayout;
+        let btn = new Button();
+        grid.addColumn(new ItemSpec(1, "auto"));
+        grid.addColumn(new ItemSpec(30, "pixel"));
+        btn.text = "x";
+        btn.horizontalAlignment = "right";
+        AbsoluteLayout.setTop(btn, 2);
+        btn.set('toDelete', item[self.primary_key])
         let label = new Label();
         label.text = item[self.search_param];
-        flexboxLayout.addChild(label);
-        label.className = "filter-select-tag";
+        GridLayout.setColumn(label, 0);
+        GridLayout.setColumn(btn, 1);
+        grid.addChild(label);
+        grid.addChild(btn);
+      
+        flexboxLayout.addChild(grid);
+        grid.className = "filter-select-tag";
+        btn.className = "filter-select-tag-delete";
+        btn.on(Button.tapEvent, function (args) {
+          self.selected.forEach((item, index) => {
+            if (item[self.primary_key] == args.object.get("toDelete"))
+              self.selected.splice(index, 1);
+          });
+
+          self.clearSelect();
+
+        }, self);
       });
     else {
       let label = new Label();
@@ -287,10 +311,25 @@ export class Common extends GridLayout {
     self.closeCallback();
     if (self.onSelect)
       if (this.multiple)
-        self.onSelect(self.selected,self.currentPage.bindingContext);
+        self.onSelect(self.selected, self.currentPage.bindingContext);
       else
-        self.onSelect(self.selected[0],self.currentPage.bindingContext);
+        self.onSelect(self.selected[0], self.currentPage.bindingContext);
 
+  }
+  private clearSelect() {
+    var self = this;
+    self.currentPage = frame.topmost().currentPage;
+    self.filterselect.removeChild(self.selected_layout);
+    var tags = self.renderTags()
+    self.filterselect.addChild(tags);
+    self.filterselect.className = "filter-select-tags-base";
+    GridLayout.setColumn(tags, 0);
+    tags.className = 'filter-select-tags-holder';
+    if (self.onSelect)
+      if (this.multiple)
+        self.onSelect(self.selected, self.currentPage.bindingContext);
+      else
+        self.onSelect(self.selected[0], self.currentPage.bindingContext);
   }
   private modal() {
 
@@ -300,7 +339,7 @@ export class Common extends GridLayout {
 
     var self = this;
 
-   
+
 
     var stackLayout = new StackLayout();
     var gridLayout = new GridLayout();
