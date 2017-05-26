@@ -317,6 +317,7 @@ export class Common extends GridLayout {
 
   }
   private clearSelect() {
+//after remove tag
     var self = this;
     self.currentPage = frame.topmost().currentPage;
     self.filterselect.removeChild(self.selected_layout);
