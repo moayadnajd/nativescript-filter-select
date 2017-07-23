@@ -32,7 +32,7 @@ export class HelloWorldModel extends Observable {
     this._countries = value;
   }
 
-  public selected = [{ "name": "Afghanistan", "code": "AF" }, { "name": "Albania", "code": "AL" }];
+  public selected = [{ "name": "Afghanistan", "code": "AF" }, { "name": "Albania", "code": "AL" },{"name":"United Kingdom","code":"GB"},{"name":"Tunisia","code":"TN"},{"name":"Tanzania, United Republic of","code":"TZ"}];
 
   public item_template = '<GridLayout class="item" columns="100,*,100"> <IM:ImageCacheMedia  col="0" xmlns:IM="nativescript-image-cache-media" placeholder="~/icon.png" width="90" height="60" imageUri="{{ flags(code) }}"/>  <Label col="1" class="text-center" text="{{ name }}" textWrap="true" /> <Label col="2" class="text-center" text="{{ code }}" textWrap="true" /> </GridLayout>';
 

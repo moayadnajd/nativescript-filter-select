@@ -22,6 +22,10 @@ FilterSelect{
     text-align: center;
     border-color: white;
 }
+
+.filter-select-tag label{
+   height: 100;
+}
 .filter-select-tag{
    
     margin-left: 8;
@@ -29,8 +33,11 @@ FilterSelect{
     border-color: #ccc;
     border-radius: 5; 
     padding: 6;
+  
     
 }
+
+
 .felter-select-list label{
   padding: 20;
 }

@@ -199,18 +199,20 @@ export class Common extends GridLayout {
         var grid = new GridLayout;
         let btn = new Button();
         grid.addColumn(new ItemSpec(1, "auto"));
-        grid.addColumn(new ItemSpec(30, "pixel"));
+        grid.addColumn(new ItemSpec(1, "auto"));
         btn.text = "x";
         btn.horizontalAlignment = "right";
         AbsoluteLayout.setTop(btn, 2);
-        btn.set('toDelete', item[self.primary_key])
+        btn.set('toDelete', item[self.primary_key]);
+        btn.width=60;
         let label = new Label();
         label.text = item[self.search_param];
+       // label.width = 200;
         GridLayout.setColumn(label, 0);
         GridLayout.setColumn(btn, 1);
         grid.addChild(label);
         grid.addChild(btn);
-      
+
         flexboxLayout.addChild(grid);
         grid.className = "filter-select-tag";
         btn.className = "filter-select-tag-delete";

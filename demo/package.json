@@ -2,14 +2,14 @@
   "nativescript": {
     "id": "org.nativescript.demo",
     "tns-ios": {
-      "version": "2.5.0"
+      "version": "2.5.1"
     },
     "tns-android": {
       "version": "2.5.0"
     }
   },
   "dependencies": {
-    "nativescript-filter-select": "^1.0.7",
+    "nativescript-filter-select": "file:///Users/moayad/Documents/mobile/nativescript-filter-select",
     "nativescript-image-cache-media": "^1.0.6",
     "nativescript-theme-core": "^1.0.2",
     "nativescript-unit-test-runner": "^0.3.4",

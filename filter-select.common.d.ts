@@ -14,6 +14,7 @@ export declare class Common extends GridLayout {
     private _filterd;
     private _term;
     private _lastTerm;
+    private currentPage;
     private filterselect;
     private _modal_title;
     private _hint;
@@ -41,6 +42,7 @@ export declare class Common extends GridLayout {
     renderTags(): FlexboxLayout;
     private init();
     private doneSelect();
+    private clearSelect();
     private modal();
     private initSelectFilter();
     onSubmit(): void;
