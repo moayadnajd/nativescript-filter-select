@@ -6,7 +6,7 @@ A NativeScript plugin to provide an listview widget to select AND filter items.
 
 ## Installation
 
-##### NativeScript 2.x
+##### NativeScript 3.x
 - `tns plugin add nativescript-filter-select`
 
 
@@ -155,6 +155,13 @@ margin-top: 8;
     
 }
 ```
+
+### For contributing 
+just do a pull request with description of your changes
+
+## need help with [this issue](https://github.com/moayadnajd/nativescript-filter-select/issues/5)
+
+
 
 
 
