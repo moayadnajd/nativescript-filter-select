@@ -1,3 +1,4 @@
+import { stack } from 'tns-core-modules/ui/frame';
 import { AbsoluteLayout } from 'tns-core-modules/ui/layouts/absolute-layout/absolute-layout';
 import { Observable } from 'data/observable';
 import * as app from 'application';
@@ -12,16 +13,17 @@ import { SearchBar } from "ui/search-bar";
 import { Repeater } from "ui/repeater";
 import { ItemSpec } from "ui/layouts/grid-layout";
 import { ListView } from "ui/list-view";
+import { LengthPxUnit } from 'ui/styling/style-properties';
 declare var UIView: any, CGRectMake: any, CGSizeMake: any;
 import { ContentView } from 'ui/content-view';
-import view = require("ui/core/view");
+import view = require('ui/core/view');
 import { Page } from 'ui/page';
-import color = require("color");
+import color = require('color');
 var frame = require('ui/frame');
+import { TextView } from "ui/text-view";
 class modalView extends Observable {
   constructor() {
     super();
-
 
   }
 
@@ -51,13 +53,13 @@ export class Common extends GridLayout {
   private _modal_title: string = "Please select items";
   private _hint: string = "Please select some items";
   private _selected_flag: string;
-  private _multiple: boolean = true;
+  private _multiple:any ="true" ;
 
-  public get multiple(): boolean {
+  public get multiple() {
     return this._multiple;
   }
 
-  public set multiple(value: boolean) {
+  public set multiple(value) {
     this._multiple = value;
   }
 
@@ -177,14 +179,14 @@ export class Common extends GridLayout {
   set selected(value) {
     this._selected = value;
   }
-  onLoaded() {
+
+  constructor() {
+    super();
+
     var self = this;
     setTimeout(function () {
       self.init();
     }, 1)
-  }
-  constructor() {
-    super();
 
   }
 
@@ -198,21 +200,29 @@ export class Common extends GridLayout {
       this.selected.forEach((item) => {
         var grid = new GridLayout;
         let btn = new Button();
-        grid.addColumn(new ItemSpec(1, "auto"));
-        grid.addColumn(new ItemSpec(1, "auto"));
-        btn.text = "x";
-        btn.horizontalAlignment = "right";
-        AbsoluteLayout.setTop(btn, 2);
-        btn.set('toDelete', item[self.primary_key]);
-        btn.width=60;
-        let label = new Label();
-        label.text = item[self.search_param];
-       // label.width = 200;
-        GridLayout.setColumn(label, 0);
-        GridLayout.setColumn(btn, 1);
-        grid.addChild(label);
-        grid.addChild(btn);
 
+        btn.text = "x";
+        btn.horizontalAlignment = "left";
+        btn.set('toDelete', item[self.primary_key]);
+        btn.width = 10;
+        let label = new Label();
+        let stack = new StackLayout();
+        label.text = item[self.search_param];
+        label.fontSize = 18;
+        label.height = "auto";
+        label.padding = 1;
+        label.width = "auto";
+        label.textWrap = true;
+        stack.addChild(label);
+        stack.orientation = 'vertical';
+        GridLayout.setColumn(stack, 1);
+        GridLayout.setColumn(btn, 0);
+
+        grid.addColumn(new ItemSpec(1, "auto"));
+        grid.addColumn(new ItemSpec(1, "auto"));
+
+        grid.addChild(stack);
+        grid.addChild(btn);
         flexboxLayout.addChild(grid);
         grid.className = "filter-select-tag";
         btn.className = "filter-select-tag-delete";
@@ -221,10 +231,9 @@ export class Common extends GridLayout {
             if (item[self.primary_key] == args.object.get("toDelete"))
               self.selected.splice(index, 1);
           });
-
           self.clearSelect();
-
         }, self);
+
       });
     else {
       let label = new Label();
@@ -268,17 +277,20 @@ export class Common extends GridLayout {
     filterselect.addRow(new ItemSpec(1, "star"));
     filterselect.addColumn(new ItemSpec(1, "star"));
     filterselect.addColumn(new ItemSpec(1, "auto"));
+
+    filterselect.addChild(button);
+
     filterselect.addChild(tags);
-    filterselect.addChild(button)
+    GridLayout.setRow(tags, 0);
+    GridLayout.setRow(button, 0);
     GridLayout.setColumn(tags, 0);
+    GridLayout.setColumnSpan(tags, 1);
     GridLayout.setColumn(button, 1);
     tags.className = 'filter-select-tags-holder';
-
-
-
     this.filterselect = filterselect;
     this.addRow(new ItemSpec(1, "auto"));
     this.addChild(filterselect);
+    GridLayout.setRow(filterselect, 0);
     this.verticalAlignment = "top";
     this.className = 'base-filter-select';
 
@@ -310,16 +322,17 @@ export class Common extends GridLayout {
     self.filterselect.className = "filter-select-tags-base";
     GridLayout.setColumn(tags, 0);
     tags.className = 'filter-select-tags-holder';
-    self.closeCallback();
+
     if (self.onSelect)
-      if (this.multiple)
+      if (self.multiple =="true ")
         self.onSelect(self.selected, self.currentPage.bindingContext);
       else
         self.onSelect(self.selected[0], self.currentPage.bindingContext);
 
+    self.closeCallback();
   }
   private clearSelect() {
-//after remove tag
+    //after remove tag
     var self = this;
     self.currentPage = frame.topmost().currentPage;
     self.filterselect.removeChild(self.selected_layout);
@@ -329,7 +342,7 @@ export class Common extends GridLayout {
     GridLayout.setColumn(tags, 0);
     tags.className = 'filter-select-tags-holder';
     if (self.onSelect)
-      if (this.multiple)
+      if (self.multiple == "true")
         self.onSelect(self.selected, self.currentPage.bindingContext);
       else
         self.onSelect(self.selected[0], self.currentPage.bindingContext);
@@ -363,26 +376,28 @@ export class Common extends GridLayout {
         return item[self.primary_key] == self.filterd.getItem(args.index)[self.primary_key];
       });
       if (selected.length)
-        args.view.className = "filter-select-selected";
+        args.view.className = "item filter-select-selected";
       else
-        args.view.className = "";
+        args.view.className = "item"
     });
     listView.on("itemTap", function (args) {
-      if (!self.multiple && args.view.className == "filter-select-selected")
+      if (self.multiple=="false" && args.view.className == "item filter-select-selected")
         return 0;
-      if (!self.multiple)
+      if (self.multiple=="false")
         self.selected_items = [];
-      if (args.view.className != "filter-select-selected") {
-
-        args.view.className = "filter-select-selected";
+      if (args.view.className != "item filter-select-selected") {
+        args.view.className = "item filter-select-selected";
         if (self.selected_flag)
-          args.view.bindingContext[self.selected_flag] = true
+          args.view.bindingContext[self.selected_flag] = true;
       }
       else {
-        args.view.className = "";
+        args.view.className = "item";
         if (self.selected_flag)
-          args.view.bindingContext[self.selected_flag] = false
+          args.view.bindingContext[self.selected_flag] = false;
       }
+
+
+
       // if (self.selected_flag)
       //   args.view.notify({
       //     object: self,
@@ -402,8 +417,13 @@ export class Common extends GridLayout {
           return args.view.bindingContext[self.primary_key] != item[self.primary_key]
         });
 
-      if (!self.multiple)
-        self.doneSelect();
+      console.log('self.multiple', self.multiple)
+
+      if (self.multiple=="false")
+          self.doneSelect();
+
+
+      listView.refresh();
       return true;
     });
 

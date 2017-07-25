@@ -32,11 +32,20 @@ export class HelloWorldModel extends Observable {
     this._countries = value;
   }
 
-  public selected = [{ "name": "Afghanistan", "code": "AF" }, { "name": "Albania", "code": "AL" },{"name":"United Kingdom","code":"GB"},{"name":"Tunisia","code":"TN"},{"name":"Tanzania, United Republic of","code":"TZ"}];
+  public selected = [{ "name": "Afghanistan", "code": "AF" }, { "name": "Albania", "code": "AL" }, { "name": "United Kingdom", "code": "GB" }, { "name": "Tunisia", "code": "TN" }, { "name": "Tanzania, United Republic of", "code": "TZ" }];
 
-  public item_template = '<GridLayout class="item" columns="100,*,100"> <IM:ImageCacheMedia  col="0" xmlns:IM="nativescript-image-cache-media" placeholder="~/icon.png" width="90" height="60" imageUri="{{ flags(code) }}"/>  <Label col="1" class="text-center" text="{{ name }}" textWrap="true" /> <Label col="2" class="text-center" text="{{ code }}" textWrap="true" /> </GridLayout>';
+  public item_template = `
+  <GridLayout class="item" columns="100,*,100"> 
+  <IC:WebImage xmlns:IC="nativescript-web-image-cache" width="90" height="60" stretch="fill" row="0"
+             col="0"  id="my-image-1" placeholder="~/icon.png" 
+             src="{{ flags(code) }}">
+             </IC:WebImage>
+  <Label col="1" class="text-center" text="{{ name }}" textWrap="true" /> 
+  <Label col="2" class="text-center" text="{{ code }}" textWrap="true" /> 
+  </GridLayout>
+  `;
 
-  public onSelect(selectedArray,slef) {
+  public onSelect(selectedArray, slef) {
     console.log('selected array is => ' + JSON.stringify(selectedArray));
     console.log('selected array is => ' + JSON.stringify(slef.selected));
   }

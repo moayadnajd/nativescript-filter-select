@@ -20,7 +20,7 @@ export declare class Common extends GridLayout {
     private _hint;
     private _selected_flag;
     private _multiple;
-    multiple: boolean;
+    multiple: any;
     selected_flag: string;
     search_param: string;
     filterd: ObservableArray<any>;
@@ -37,7 +37,6 @@ export declare class Common extends GridLayout {
     items: any[];
     primary_key: any;
     selected: any[];
-    onLoaded(): void;
     constructor();
     renderTags(): FlexboxLayout;
     private init();

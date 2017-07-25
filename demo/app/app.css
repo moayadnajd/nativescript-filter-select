@@ -21,6 +21,7 @@ FilterSelect{
     width: 20;
     text-align: center;
     border-color: white;
+    color:red;
 }
 
 .filter-select-tag label{
@@ -51,7 +52,7 @@ text-align: center;
 margin-top: 8;
 }
 
-.filter-select-selected{
+.item.filter-select-selected{
     border-width: 1;
     border-color: green;
 }
