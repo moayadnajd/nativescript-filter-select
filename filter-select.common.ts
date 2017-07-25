@@ -324,7 +324,7 @@ export class Common extends GridLayout {
     tags.className = 'filter-select-tags-holder';
 
     if (self.onSelect)
-      if (self.multiple =="true ")
+      if (self.multiple =="true")
         self.onSelect(self.selected, self.currentPage.bindingContext);
       else
         self.onSelect(self.selected[0], self.currentPage.bindingContext);
