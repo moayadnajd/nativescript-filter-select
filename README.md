@@ -69,15 +69,33 @@ FilterSelect{
    margin: 0;
    padding: 1;
 }
+
+.filter-select-tag-delete{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    height:20;
+    width: 20;
+    text-align: center;
+    border-color: white;
+    color:red;
+}
+
+.filter-select-tag label{
+   height: 100;
+}
 .filter-select-tag{
-   
+
     margin-left: 8;
     border-width: 1;
     border-color: #ccc;
-    border-radius: 5; 
+    border-radius: 5;
     padding: 6;
-    
+
+
 }
+
+
 .felter-select-list label{
   padding: 20;
 }
@@ -91,32 +109,11 @@ text-align: center;
 margin-top: 8;
 }
 
-.filter-select-selected{
+.item.filter-select-selected{
     border-width: 1;
     border-color: green;
 }
-.filter-select-tags-holder{
-}
 
-.filter-select-tag-delete{
-    padding: 0;
-    margin: 0;
-    background-color: white;
-    height:20;
-    width: 20;
-    text-align: center;
-    border-color: white;
-}
-
-.base-filter-select{
-}
-
-.btn-filter-select{
-}
-
-.base-filter-select{
-
-}
 ```
 ### CSS core-theme styles if you dont have them just make your own 
 ```CSS
