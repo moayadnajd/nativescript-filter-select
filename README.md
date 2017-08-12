@@ -1,8 +1,5 @@
-# nativeScript-filter-select
-# NativeScript filter select 
-
+# FilterSelect 
 A NativeScript plugin to provide an listview widget to select AND filter items.
-
 
 ## Installation
 
@@ -24,10 +21,32 @@ A NativeScript plugin to provide an listview widget to select AND filter items.
      hint="Please select some countries" 
      modal_title="Countries" search_param="name" 
      primary_key="code" 
-     onSelect="{{ onSelect }}"
+     change="{{ onSelect }}"
      />
    </StackLayout>
 </Page>
+```
+## Angular NativeScript
+### Regiter plugin in Component class
+
+```JAVASCRIPT
+
+import * as elementRegistryModule from 'nativescript-angular/element-registry';
+elementRegistryModule.registerElement("FilterSelect", () => require("nativescript-filter-select").FilterSelect);
+
+```
+
+### HTML
+```HTML
+    <FilterSelect 
+        height="100%"
+        [items]="items"
+        (change)="onitemselected($event)"
+        hint="Please select some items" 
+        modal_title="item" search_param="name" 
+        primary_key="id">
+
+    </FilterSelect>
 ```
 
 
@@ -47,7 +66,7 @@ Sample 1 |  Sample 2
 | selected_flag   | index of selected boolean flag to mark item as selected     | boolean : optional 
 |search_param| index  of the string value in the items object to search on it  |string : name
 |item_template|xml template for the listview items | string : `<Label col="0" text="{{ ${this._search_param} }}" textWrap="true" />`
-|onSelect| on select function treger when select done | function : optional `onSelect(selectedArray,bindingcontextObject)`
+|change| change event  treger when select done | function : optional `change($event)`
 |modal_title|title of the filter modal | String : `Please select items`
 |hint|string to show when no items selected |`Please select some items`
 |items|array of objects to populate the list of options | Array :[]

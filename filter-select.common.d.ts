@@ -8,7 +8,6 @@ export declare class Common extends GridLayout {
     private _selected_layout;
     private _primary_key;
     private _gridBase;
-    private _onSelect;
     private _search_param;
     private _item_template;
     private _filterd;
@@ -20,13 +19,13 @@ export declare class Common extends GridLayout {
     private _hint;
     private _selected_flag;
     private _multiple;
+    static changeEvent: string;
     multiple: any;
     selected_flag: string;
     search_param: string;
     filterd: ObservableArray<any>;
     term: string;
     item_template: any;
-    onSelect: any;
     gridBase: any;
     selected_layout: any;
     private modalPage;

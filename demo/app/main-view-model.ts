@@ -44,10 +44,9 @@ export class HelloWorldModel extends Observable {
   <Label col="2" class="text-center" text="{{ code }}" textWrap="true" /> 
   </GridLayout>
   `;
-
-  public onSelect(selectedArray, slef) {
-    console.log('selected array is => ' + JSON.stringify(selectedArray));
-    console.log('selected array is => ' + JSON.stringify(slef.selected));
+  
+  public onSelect(args) {
+    console.log('selected array is => ' +JSON.stringify( args.selected));
   }
 
   constructor() {
@@ -56,8 +55,6 @@ export class HelloWorldModel extends Observable {
       this.countries = data;
       this.Refresh('countries');
     });
-
-
   }
 
   public Refresh(key = null) {

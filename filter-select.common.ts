@@ -42,7 +42,6 @@ export class Common extends GridLayout {
   private _selected_layout: any = null;
   private _primary_key: string = "id";
   private _gridBase: any;
-  private _onSelect: any = null;
   private _search_param: string = 'name';
   private _item_template: any = null;
   private _filterd: ObservableArray<any> = new ObservableArray(this.items);
@@ -54,7 +53,7 @@ export class Common extends GridLayout {
   private _hint: string = "Please select some items";
   private _selected_flag: string;
   private _multiple:any ="true" ;
-
+  public static changeEvent:string ="change";
   public get multiple() {
     return this._multiple;
   }
@@ -102,14 +101,6 @@ export class Common extends GridLayout {
 
   public set item_template(value: any) {
     this._item_template = value;
-  }
-
-  public get onSelect(): any {
-    return this._onSelect;
-  }
-
-  public set onSelect(value: any) {
-    this._onSelect = value;
   }
 
   public get gridBase(): any {
@@ -184,6 +175,7 @@ export class Common extends GridLayout {
     super();
 
     var self = this;
+   
     setTimeout(function () {
       self.init();
     }, 1)
@@ -251,6 +243,7 @@ export class Common extends GridLayout {
 
   private init() {
     var self = this;
+    (<any>self).height="100%";
     var gridLayout = new GridLayout();
     var label = new Label();
     var button = new Button();
@@ -293,25 +286,6 @@ export class Common extends GridLayout {
     GridLayout.setRow(filterselect, 0);
     this.verticalAlignment = "top";
     this.className = 'base-filter-select';
-
-    // var repeater = new Repeater();
-    // repeater.itemTemplate = '<Label class="filter-select-tag" text="{{ name }}" textWrap="true" />';
-    // var repeaterBindingOptions = {
-    //   sourceProperty: "selected",
-    //   targetProperty: "items",
-    //   twoWay: true
-    // };
-    // repeater.bind(repeaterBindingOptions, this);
-    // this.addChild(repeater);
-
-    // repeater.notify({
-    //   object: repeater,
-    //   eventName: Observable.propertyChangeEvent,
-    //   propertyName: 'selected',
-    //   value: self.selected
-    // });
-    //  this.cssClasses.add('base-filter-select');
-
   }
   private doneSelect() {
     var self = this;
@@ -323,11 +297,18 @@ export class Common extends GridLayout {
     GridLayout.setColumn(tags, 0);
     tags.className = 'filter-select-tags-holder';
 
-    if (self.onSelect)
       if (self.multiple =="true")
-        self.onSelect(self.selected, self.currentPage.bindingContext);
+        self.notify({ 
+          eventName: Common.changeEvent,
+          object: self,
+          selected:self.selected
+        });
       else
-        self.onSelect(self.selected[0], self.currentPage.bindingContext);
+        self.notify({ 
+          eventName: Common.changeEvent,
+          object: self,
+          selected:self.selected[0]
+        });
 
     self.closeCallback();
   }
@@ -341,22 +322,21 @@ export class Common extends GridLayout {
     self.filterselect.className = "filter-select-tags-base";
     GridLayout.setColumn(tags, 0);
     tags.className = 'filter-select-tags-holder';
-    if (self.onSelect)
       if (self.multiple == "true")
-        self.onSelect(self.selected, self.currentPage.bindingContext);
+        self.notify({ 
+          eventName: Common.changeEvent,
+          object: self,
+          selected:self.selected
+        });
       else
-        self.onSelect(self.selected[0], self.currentPage.bindingContext);
+        self.notify({ 
+          eventName: Common.changeEvent,
+          object: self,
+          selected:self.selected[0]
+        });
   }
   private modal() {
-
-    // console.log(this.className);
-
-
-
     var self = this;
-
-
-
     var stackLayout = new StackLayout();
     var gridLayout = new GridLayout();
     var listView = new ListView();
@@ -416,8 +396,6 @@ export class Common extends GridLayout {
         self.selected_items = self.selected_items.filter(function (item, index) {
           return args.view.bindingContext[self.primary_key] != item[self.primary_key]
         });
-
-      console.log('self.multiple', self.multiple)
 
       if (self.multiple=="false")
           self.doneSelect();
