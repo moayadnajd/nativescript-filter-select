@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~4.2.0",
     "@angular/router": "~4.2.0",
     "nativescript-angular": "~4.2.0",
-    "nativescript-filter-select": "file:///Users/moayad/Documents/mobile/nativescript-filter-select",
+    "nativescript-filter-select": "^1.1.1",
     "nativescript-theme-core": "~1.0.2",
     "reflect-metadata": "~0.1.8",
     "rxjs": "~5.4.2",
