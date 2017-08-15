@@ -66,7 +66,7 @@ Sample 1 |  Sample 2
 | selected_flag   | index of selected boolean flag to mark item as selected     | boolean : optional 
 |search_param| index  of the string value in the items object to search on it  |string : name
 |item_template|xml template for the listview items | string : `<Label col="0" text="{{ ${this._search_param} }}" textWrap="true" />`
-|change| change event  treger when select done | function : optional `change(args)` and selected item can be accessed as args.selected
+|change| change event  treger when select done | function : optional `change(args)` and selected item can be accessed as `args.selected`
 |modal_title|title of the filter modal | String : `Please select items`
 |hint|string to show when no items selected |`Please select some items`
 |items|array of objects to populate the list of options | Array :[]
