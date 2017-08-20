@@ -37,6 +37,7 @@
     },
     "exclude": [
         "demo",
+        "demo-ng",
         "node_modules"
     ],
     "compileOnSave": false

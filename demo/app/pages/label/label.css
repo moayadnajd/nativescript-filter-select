@@ -1,0 +1,17 @@
+FilterSelect{
+    border-width: 0;
+    border-color: #ccc;
+    color:blue;
+    text-align:center;
+}
+
+.dropdown{
+     border-width: 1;
+     border-color: #ccc;
+     border-radius:20;
+}
+
+.ficon{
+
+    padding-right:40;
+}

@@ -12,6 +12,9 @@ FilterSelect{
    margin: 0;
    padding: 1;
 }
+.fa {
+  font-family: FontAwesome, fontawesome-webfont;
+}
 
 .filter-select-tag-delete{
     padding: 0;

@@ -56,12 +56,13 @@ elementRegistryModule.registerElement("FilterSelect", () => require("nativescrip
 
 Sample 1 |  Sample 2
 -------- | ---------
-![Sample1](http://codeobia.com/screenshots/android-filter-select.gif) | ![Sample2](http://codeobia.com/screenshots/ios-filter-select.gif)
+![Sample1](http://codeobia.com/screenshots/filter-label.gif) | ![Sample2](http://codeobia.com/screenshots/ios-filter-select.gif)
 
 ## Attributes
 
 | Attribute |                               Description                    |Default 
 | ------------- | ------------------------------------------------------- |--------
+|   render      | to render to "tags" or "label"                          | string : tags 
 |   multiple    | to limit the options selected to one if set to false       | boolean : true
 | selected_flag   | index of selected boolean flag to mark item as selected     | boolean : optional 
 |search_param| index  of the string value in the items object to search on it  |string : name

@@ -13,7 +13,9 @@ export declare class Common extends GridLayout {
     private _filterd;
     private _term;
     private _lastTerm;
+    labelselect: any;
     private currentPage;
+    render: string;
     private filterselect;
     private _modal_title;
     private _hint;
@@ -39,10 +41,14 @@ export declare class Common extends GridLayout {
     constructor();
     renderTags(): FlexboxLayout;
     private init();
+    renderTagsHolder(): GridLayout;
+    tagsDone(): void;
+    labelDone(): void;
+    tagsClear(): void;
     private doneSelect();
     private clearSelect();
     private modal();
-    private initSelectFilter();
     onSubmit(): void;
     private listnToSearch();
+    private parseOptions(view, options);
 }

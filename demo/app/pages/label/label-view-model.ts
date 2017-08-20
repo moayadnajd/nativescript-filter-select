@@ -1,6 +1,5 @@
 import { Observable } from 'data/observable';
 import * as fs from 'file-system';
-import frameModule = require("tns-core-modules/ui/frame");
 var documents = fs.knownFolders.currentApp();
 
 class FileReader {
@@ -21,7 +20,7 @@ class FileReader {
     });
   }
 }
-export class HelloWorldModel extends Observable {
+export class LabelModel extends Observable {
 
   private _countries: any[] = [];
 
@@ -70,15 +69,5 @@ export class HelloWorldModel extends Observable {
 
   }
 
-
-  public openpage(args){
-    var navigationEntry = {
-      moduleName: args.object.pageName,
-      context: this,
-      animated: true
-  };
-  
-  frameModule.topmost().navigate(navigationEntry);
-  }
 
 }

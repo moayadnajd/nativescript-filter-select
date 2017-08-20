@@ -5,6 +5,7 @@
    loaded="pageLoaded" class="page">
    <ScrollView>
   <StackLayout class="p-20">
+  <Button tap="{{ openpage }}" pageName="pages/label/label" text="label page"  />
      <Label class="h2" text="select default" textWrap="true" />
      <StackLayout class="hr-light m-10" />
      <FS:FilterSelect items="{{ countries }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code"  change="{{ onSelect }}"  />

@@ -19,4 +19,6 @@ demo-ng/*.d.ts
 demo-ng/lib
 demo-ng/platforms
 demo-ng/node_modules
+*.d.ts
 .DS_Store
+

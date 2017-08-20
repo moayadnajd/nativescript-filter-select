@@ -9,7 +9,8 @@
     }
   },
   "dependencies": {
-    "nativescript-filter-select": "^1.1.1",
+    "nativescript-filter-select": "^1.1.2",
+    "nativescript-fonticon": "^1.1.1",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "^0.3.4",
     "nativescript-web-image-cache": "^4.2.2",

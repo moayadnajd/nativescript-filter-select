@@ -7,6 +7,7 @@ import { GridLayout } from "ui/layouts/grid-layout";
 import { StackLayout } from "ui/layouts/stack-layout";
 import { FlexboxLayout } from "ui/layouts/flexbox-layout";
 import { ObservableArray } from "data/observable-array";
+import { GridUnitType } from "tns-core-modules/ui/layouts/grid-layout";
 import { Label } from "ui/label";
 import { Button } from "ui/button";
 import { SearchBar } from "ui/search-bar";
@@ -47,13 +48,15 @@ export class Common extends GridLayout {
   private _filterd: ObservableArray<any> = new ObservableArray(this.items);
   private _term: string = '';
   private _lastTerm: string = null;
+  public labelselect:any;
   private currentPage = null;
+  public render: string = "tags";
   private filterselect: any;
   private _modal_title: string = "Please select items";
   private _hint: string = "Please select some items";
   private _selected_flag: string;
-  private _multiple:any ="true" ;
-  public static changeEvent:string ="change";
+  private _multiple: any = "true";
+  public static changeEvent: string = "change";
   public get multiple() {
     return this._multiple;
   }
@@ -175,7 +178,7 @@ export class Common extends GridLayout {
     super();
 
     var self = this;
-   
+
     setTimeout(function () {
       self.init();
     }, 1)
@@ -243,14 +246,39 @@ export class Common extends GridLayout {
 
   private init() {
     var self = this;
-    (<any>self).height="100%";
-    var gridLayout = new GridLayout();
-    var label = new Label();
-    var button = new Button();
-    label.text = "this is lable";
     if (this.item_template == null)
       this.item_template = `<Label col="0" text="{{ ${this._search_param} }}" textWrap="true" />`;
 
+    if (self.selected_flag)
+      this.selected = this.items.filter((item) => {
+        return item[self.selected_flag];
+      });
+
+    if (this.render == "tags") {
+      this.filterselect = this.renderTagsHolder();
+      this.addRow(new ItemSpec(1, "auto"));
+      this.addChild(this.filterselect);
+      GridLayout.setRow(this.filterselect, 0);
+      this.verticalAlignment = "top";
+
+    } else if (this.render == "label") {
+      this.multiple="false";
+      this.labelselect = this.parseOptions(new Label, { className: "filter-select-label", text: this.hint });
+     
+      this.labelselect.on(Button.tapEvent, (arg) => {
+        self.currentPage = frame.topmost().currentPage;
+        self.currentPage.showModal(self.modal(), '', function closeCallback() {
+        }, true);
+      });
+      this.addChild(this.labelselect);
+
+    } 
+
+  }
+
+  renderTagsHolder() {
+    let self = this;
+    var button = new Button();
     button.text = 'Select';
     button.className = "btn btn-primary btn-filter-select";
     button.on(Button.tapEvent, function (eventData) {
@@ -258,21 +286,12 @@ export class Common extends GridLayout {
       self.currentPage.showModal(self.modal(), '', function closeCallback() {
       }, true);
     }, this);
-    if (self.selected_flag)
-      this.selected = this.items.filter((item) => {
-        return item[self.selected_flag];
-      });
-
-    //  this.addChild(button);
-    //  this.addChild(this.renderTags());
     let tags = this.renderTags()
     let filterselect = new GridLayout();
     filterselect.addRow(new ItemSpec(1, "star"));
     filterselect.addColumn(new ItemSpec(1, "star"));
     filterselect.addColumn(new ItemSpec(1, "auto"));
-
     filterselect.addChild(button);
-
     filterselect.addChild(tags);
     GridLayout.setRow(tags, 0);
     GridLayout.setRow(button, 0);
@@ -280,40 +299,26 @@ export class Common extends GridLayout {
     GridLayout.setColumnSpan(tags, 1);
     GridLayout.setColumn(button, 1);
     tags.className = 'filter-select-tags-holder';
-    this.filterselect = filterselect;
-    this.addRow(new ItemSpec(1, "auto"));
-    this.addChild(filterselect);
-    GridLayout.setRow(filterselect, 0);
-    this.verticalAlignment = "top";
-    this.className = 'base-filter-select';
+
+    return filterselect;
   }
-  private doneSelect() {
-    var self = this;
-    self.selected = self.selected_items;
+
+  public tagsDone() {
+    let self = this;
     self.filterselect.removeChild(self.selected_layout);
     var tags = self.renderTags()
     self.filterselect.addChild(tags);
     self.filterselect.className = "filter-select-tags-base";
     GridLayout.setColumn(tags, 0);
     tags.className = 'filter-select-tags-holder';
-
-      if (self.multiple =="true")
-        self.notify({ 
-          eventName: Common.changeEvent,
-          object: self,
-          selected:self.selected
-        });
-      else
-        self.notify({ 
-          eventName: Common.changeEvent,
-          object: self,
-          selected:self.selected[0]
-        });
-
-    self.closeCallback();
   }
-  private clearSelect() {
-    //after remove tag
+  public labelDone() {
+    let self = this;
+     
+    this.labelselect.text=self.selected[0][this.search_param];
+  }
+
+  public tagsClear() {
     var self = this;
     self.currentPage = frame.topmost().currentPage;
     self.filterselect.removeChild(self.selected_layout);
@@ -322,18 +327,51 @@ export class Common extends GridLayout {
     self.filterselect.className = "filter-select-tags-base";
     GridLayout.setColumn(tags, 0);
     tags.className = 'filter-select-tags-holder';
-      if (self.multiple == "true")
-        self.notify({ 
-          eventName: Common.changeEvent,
-          object: self,
-          selected:self.selected
-        });
-      else
-        self.notify({ 
-          eventName: Common.changeEvent,
-          object: self,
-          selected:self.selected[0]
-        });
+  }
+
+  private doneSelect() {
+    var self = this;
+    self.selected = self.selected_items;
+if(this.render=="tags")
+    this.tagsDone();
+else if(this.render=="label")
+  this.labelDone();
+
+    if (self.multiple == "true")
+      self.notify({
+        eventName: Common.changeEvent,
+        object: self,
+        selected: self.selected
+      });
+    else
+      self.notify({
+        eventName: Common.changeEvent,
+        object: self,
+        selected: self.selected[0]
+      });
+
+    self.closeCallback();
+  }
+
+
+
+  private clearSelect() {
+    //after remove tag
+    var self = this;
+    this.tagsClear();
+
+    if (self.multiple == "true")
+      self.notify({
+        eventName: Common.changeEvent,
+        object: self,
+        selected: self.selected
+      });
+    else
+      self.notify({
+        eventName: Common.changeEvent,
+        object: self,
+        selected: self.selected[0]
+      });
   }
   private modal() {
     var self = this;
@@ -361,9 +399,9 @@ export class Common extends GridLayout {
         args.view.className = "item"
     });
     listView.on("itemTap", function (args) {
-      if (self.multiple=="false" && args.view.className == "item filter-select-selected")
+      if (self.multiple == "false" && args.view.className == "item filter-select-selected")
         return 0;
-      if (self.multiple=="false")
+      if (self.multiple == "false")
         self.selected_items = [];
       if (args.view.className != "item filter-select-selected") {
         args.view.className = "item filter-select-selected";
@@ -397,8 +435,8 @@ export class Common extends GridLayout {
           return args.view.bindingContext[self.primary_key] != item[self.primary_key]
         });
 
-      if (self.multiple=="false")
-          self.doneSelect();
+      if (self.multiple == "false")
+        self.doneSelect();
 
 
       listView.refresh();
@@ -468,10 +506,7 @@ export class Common extends GridLayout {
     return this.modalPage;
   }
 
-  private initSelectFilter() {
 
-
-  }
 
   public onSubmit() {
 
@@ -506,7 +541,24 @@ export class Common extends GridLayout {
     }, 500)
   }
 
+  private parseOptions(view, options) {
 
+    Object.keys(options).forEach(function (key, index) {
+      if (key === "rows")
+        options[key].forEach(function (value, index) {
+          view.addRow(new ItemSpec(1, (<GridUnitType>value)));
+        });
+      else if (key === "columns")
+        options[key].forEach(function (value, index) {
+          view.addColumn(new ItemSpec(1, (<GridUnitType>value)));
+        });
+      else {
+        view[key] = options[key];
+      }
+    });
+
+    return view;
+  }
 
 }
 
