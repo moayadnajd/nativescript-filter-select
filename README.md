@@ -1,6 +1,12 @@
 # FilterSelect 
 A NativeScript plugin to provide an listview widget to select AND filter items.
+## Sample Screenshots
 
+#### Android and ios
+
+Sample 1 |  Sample 2
+-------- | ---------
+![Sample1](http://codeobia.com/screenshots/filter-label.gif) | ![Sample2](http://codeobia.com/screenshots/ios-filter-select.gif)
 ## Installation
 
 ##### NativeScript 3.x
@@ -50,13 +56,7 @@ elementRegistryModule.registerElement("FilterSelect", () => require("nativescrip
 ```
 
 
-## Sample Screenshots
 
-#### Android and ios
-
-Sample 1 |  Sample 2
--------- | ---------
-![Sample1](http://codeobia.com/screenshots/filter-label.gif) | ![Sample2](http://codeobia.com/screenshots/ios-filter-select.gif)
 
 ## Attributes
 
