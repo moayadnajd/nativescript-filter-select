@@ -1,7 +1,8 @@
+
+# FilterSelect 
 [![npm](https://img.shields.io/npm/v/nativescript-filter-select.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/nativescript-filter-select)
 [![npm](https://img.shields.io/npm/dt/nativescript-filter-select.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/nativescript-filter-select)
 
-# FilterSelect 
 A NativeScript plugin to provide an listview widget to select AND filter items.
 ## Sample Screenshots
 
