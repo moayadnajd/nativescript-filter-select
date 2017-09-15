@@ -1,7 +1,7 @@
 FilterSelect{
     border-width: 0;
     border-color: #ccc;
-    color:blue;
+  
     text-align:center;
 }
 
@@ -12,6 +12,24 @@ FilterSelect{
 }
 
 .ficon{
-
     padding-right:40;
+}
+.filter-select-label{
+    color:green;
+}
+.filter-select-label.hint{
+    color:blue;
+}
+
+.filter-select-icon{
+    margin-left:10;
+}
+FilterSelect.drop-down{
+    border-width: 1;
+    border-color: #ccc;
+    padding: 10;
+}
+
+FilterSelect.disabled{
+    background-color:#ccc;
 }

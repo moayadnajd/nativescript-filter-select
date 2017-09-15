@@ -3,7 +3,8 @@ import { FlexboxLayout } from "ui/layouts/flexbox-layout";
 import { ObservableArray } from "data/observable-array";
 export declare class Common extends GridLayout {
     private _items;
-    private _selected;
+    selected: Array<any>;
+    disabled: string;
     private _selected_items;
     private _selected_layout;
     private _primary_key;
@@ -20,9 +21,8 @@ export declare class Common extends GridLayout {
     private _modal_title;
     private _hint;
     private _selected_flag;
-    private _multiple;
+    private multiple;
     static changeEvent: string;
-    multiple: any;
     selected_flag: string;
     search_param: string;
     filterd: ObservableArray<any>;
@@ -37,7 +37,6 @@ export declare class Common extends GridLayout {
     selected_items: Array<any>;
     items: any[];
     primary_key: any;
-    selected: any[];
     constructor();
     renderTags(): FlexboxLayout;
     private init();

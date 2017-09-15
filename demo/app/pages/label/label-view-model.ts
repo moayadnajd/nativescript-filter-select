@@ -32,7 +32,7 @@ export class LabelModel extends Observable {
     this._countries = value;
   }
 
-  public selected = [{ "name": "Afghanistan", "code": "AF" }, { "name": "Albania", "code": "AL" }, { "name": "United Kingdom", "code": "GB" }, { "name": "Tunisia", "code": "TN" }, { "name": "Tanzania, United Republic of", "code": "TZ" }];
+  public selected = [{ "name": "Jordan", "code": "JO" }];
 
   public item_template = `
   <GridLayout class="item" columns="100,*,100"> 
