@@ -58,7 +58,7 @@ export class Common extends GridLayout {
   private _selected_flag: string;
   private multiple: any = "true";
   public static changeEvent: string = "change";
- 
+
   public get selected_flag(): string {
     return this._selected_flag;
   }
@@ -209,7 +209,7 @@ export class Common extends GridLayout {
         grid.className = "filter-select-tag";
         btn.className = "filter-select-tag-delete";
         btn.on(Button.tapEvent, function (args) {
-          if(self.disabled == "false"){
+          if (self.disabled == "false") {
             self.selected.forEach((item, index) => {
               if (item[self.primary_key] == args.object.get("toDelete"))
                 self.selected.splice(index, 1);
@@ -258,7 +258,7 @@ export class Common extends GridLayout {
       if (this.selected.length)
         this.labelDone();
       this.on(Button.tapEvent, (arg) => {
-        if(self.disabled == "false"){
+        if (self.disabled == "false") {
           self.currentPage = frame.topmost().currentPage;
           self.currentPage.showModal(self.modal(), '', function closeCallback() {
           }, true);
@@ -272,7 +272,7 @@ export class Common extends GridLayout {
       if (this.selected.length)
         this.labelDone();
       this.on(Button.tapEvent, (arg) => {
-        if(self.disabled == "false"){
+        if (self.disabled == "false") {
           self.currentPage = frame.topmost().currentPage;
           self.currentPage.showModal(self.modal(), '', function closeCallback() {
           }, true);
@@ -286,7 +286,7 @@ export class Common extends GridLayout {
       dropholder.addChild(nsicon)
       nsicon.horizontalAlignment = "right";
       this.addChild(dropholder);
-      dropholder.horizontalAlignment="center";
+      dropholder.horizontalAlignment = "center";
 
     }
 
@@ -298,7 +298,7 @@ export class Common extends GridLayout {
     button.text = 'Select';
     button.className = "btn btn-primary btn-filter-select";
     button.on(Button.tapEvent, function (eventData) {
-      if(self.disabled == "false"){
+      if (self.disabled == "false") {
         self.currentPage = frame.topmost().currentPage;
         self.currentPage.showModal(self.modal(), '', function closeCallback() {
         }, true);
@@ -347,7 +347,12 @@ export class Common extends GridLayout {
     GridLayout.setColumn(tags, 0);
     tags.className = 'filter-select-tags-holder';
   }
-
+  public refresh() {
+    if (this.render == "tags")
+      this.tagsDone();
+    else if (this.render == "label" || this.render == "drop")
+      this.labelDone();
+  }
   private doneSelect() {
     var self = this;
     self.selected = self.selected_items;
@@ -482,17 +487,17 @@ export class Common extends GridLayout {
     gridLayout.className = "action-bar p-10";
     if (this.multiple == "false")
       donebtn.on("tap", function (args) {
-        if(self.render=="tags"){
-          self.selected_items=[];
+        if (self.render == "tags") {
+          self.selected_items = [];
           self.doneSelect();
         }
-        else{
+        else {
           self.selected = [];
           self.labelselect.text = self.hint;
           self.labelselect.className = "filter-select-label hint"
           self.closeCallback();
         }
-        
+
       });
     else
       donebtn.on("tap", function (args) {

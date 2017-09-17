@@ -39,11 +39,12 @@ export declare class Common extends GridLayout {
     primary_key: any;
     constructor();
     renderTags(): FlexboxLayout;
-    private init();
+    init(): void;
     renderTagsHolder(): GridLayout;
     tagsDone(): void;
     labelDone(): void;
     tagsClear(): void;
+    refresh(): void;
     private doneSelect();
     private clearSelect();
     private modal();
