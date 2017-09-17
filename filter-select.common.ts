@@ -233,7 +233,7 @@ export class Common extends GridLayout {
 
   }
 
-  private init() {
+  public init() {
     var self = this;
 
     console.log(this.multiple)
