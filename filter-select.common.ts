@@ -15,31 +15,21 @@ import { Repeater } from "ui/repeater";
 import { ItemSpec } from "ui/layouts/grid-layout";
 import { ListView } from "ui/list-view";
 import { LengthPxUnit } from 'ui/styling/style-properties';
-declare var UIView: any, CGRectMake: any, CGSizeMake: any;
 import { ContentView } from 'ui/content-view';
 import view = require('ui/core/view');
 import { Page } from 'ui/page';
 import color = require('color');
 var frame = require('ui/frame');
 import { TextView } from "ui/text-view";
-class modalView extends Observable {
-  constructor() {
-    super();
-
-  }
-
-
-
-
-}
-
 
 
 export class Common extends GridLayout {
-
+  public searchHint="Search for item";
+  public searchBar:SearchBar;
+  public xbtn:any="x";
   private _items: Array<any> = [];
   public selected: Array<any> = [];
-  public disabled = "false"
+  public disabled: any = false
   private _selected_items: Array<any> = this.selected;
   private _selected_layout: any = null;
   private _primary_key: string = "id";
@@ -56,7 +46,7 @@ export class Common extends GridLayout {
   private _modal_title: string = "Please select items";
   private _hint: string = "Please select some items";
   private _selected_flag: string;
-  private multiple: any = "true";
+  private multiple: any = true;
   public static changeEvent: string = "change";
 
   public get selected_flag(): string {
@@ -182,8 +172,13 @@ export class Common extends GridLayout {
       this.selected.forEach((item) => {
         var grid = new GridLayout;
         let btn = new Button();
-
-        btn.text = "x";
+        var textFieldBindingOptions = {
+          sourceProperty: "xbtn",
+          targetProperty: "text",
+          twoWay: true
+        };
+        btn.bind(textFieldBindingOptions, this);
+        btn.text = self.xbtn;
         btn.horizontalAlignment = "left";
         btn.set('toDelete', item[self.primary_key]);
         btn.width = 10;
@@ -207,9 +202,9 @@ export class Common extends GridLayout {
         grid.addChild(btn);
         flexboxLayout.addChild(grid);
         grid.className = "filter-select-tag";
-        btn.className = "filter-select-tag-delete";
+        btn.className = "fa filter-select-tag-delete";
         btn.on(Button.tapEvent, function (args) {
-          if (self.disabled == "false") {
+          if (self.disabled == false) {
             self.selected.forEach((item, index) => {
               if (item[self.primary_key] == args.object.get("toDelete"))
                 self.selected.splice(index, 1);
@@ -236,7 +231,18 @@ export class Common extends GridLayout {
   public init() {
     var self = this;
 
-    console.log(this.multiple)
+    if (this.multiple == "false")
+      this.multiple = false
+    if (this.multiple == "true")
+      this.multiple = true
+
+    if (this.disabled == "true")
+      this.disabled = true
+
+    if (this.disabled == "false")
+      this.disabled = false
+
+
     if (this.item_template == null)
       this.item_template = `<Label col="0" text="{{ ${this._search_param} }}" textWrap="true" />`;
 
@@ -253,12 +259,20 @@ export class Common extends GridLayout {
       this.verticalAlignment = "top";
 
     } else if (this.render == "label") {
-      this.multiple = "false";
-      this.labelselect = this.parseOptions(new Label, { className: "filter-select-label hint", text: this.hint });
+      this.multiple = false;
+      this.labelselect = this.parseOptions(new Label, { className: "filter-select-label fa hint", text: this.hint });
+      var textFieldBindingOptions = {
+        sourceProperty: "hint",
+        targetProperty: "text",
+        twoWay: true
+      };
+      this.labelselect.bind(textFieldBindingOptions, this);
+
+
       if (this.selected.length)
         this.labelDone();
       this.on(Button.tapEvent, (arg) => {
-        if (self.disabled == "false") {
+        if (self.disabled == false) {
           self.currentPage = frame.topmost().currentPage;
           self.currentPage.showModal(self.modal(), '', function closeCallback() {
           }, true);
@@ -267,19 +281,27 @@ export class Common extends GridLayout {
       this.addChild(this.labelselect);
 
     } else if (this.render == "drop") {
-      this.multiple = "false";
-      this.labelselect = this.parseOptions(new Label, { className: "filter-select-label hint", text: this.hint });
+      this.multiple = false;
+      this.labelselect = this.parseOptions(new Label, { className: "filter-select-label fa hint", text: this.hint });
+
+      var textFieldBindingOptions = {
+        sourceProperty: "hint",
+        targetProperty: "text",
+        twoWay: true
+      };
+      this.labelselect.bind(textFieldBindingOptions, this);
       if (this.selected.length)
         this.labelDone();
       this.on(Button.tapEvent, (arg) => {
-        if (self.disabled == "false") {
+        if (self.disabled == false) {
           self.currentPage = frame.topmost().currentPage;
           self.currentPage.showModal(self.modal(), '', function closeCallback() {
           }, true);
         }
       });
 
-      let dropholder = <StackLayout>this.parseOptions(new StackLayout, { className: "filter-select-drop-holder", text: this.hint });
+      let dropholder = <StackLayout>this.parseOptions(new StackLayout, { className: "filter-select-drop-holder" });
+
       dropholder.addChild(this.labelselect)
       dropholder.orientation = "horizontal";
       let nsicon = this.parseOptions(new Label, { className: "fa filter-select-icon", text: "\uf0d7" });
@@ -298,7 +320,7 @@ export class Common extends GridLayout {
     button.text = 'Select';
     button.className = "btn btn-primary btn-filter-select";
     button.on(Button.tapEvent, function (eventData) {
-      if (self.disabled == "false") {
+      if (self.disabled == false) {
         self.currentPage = frame.topmost().currentPage;
         self.currentPage.showModal(self.modal(), '', function closeCallback() {
         }, true);
@@ -329,12 +351,26 @@ export class Common extends GridLayout {
     self.filterselect.className = "filter-select-tags-base";
     GridLayout.setColumn(tags, 0);
     tags.className = 'filter-select-tags-holder';
+    this.notify({
+      object: self,
+      eventName: Observable.propertyChangeEvent,
+      propertyName: 'hint',
+      value: self.hint
+    })
   }
   public labelDone() {
     let self = this;
-
-    this.labelselect.text = self.selected[0][this.search_param];
-    this.labelselect.className = "filter-select-label selected"
+    if (self.selected.length > 0) {
+      this.labelselect.text = self.selected[0][this.search_param];
+      this.labelselect.className = "filter-select-label fa selected"
+    }else{
+    this.notify({
+      object: self,
+      eventName: Observable.propertyChangeEvent,
+      propertyName: 'hint',
+      value: self.hint
+    })
+    }
   }
 
   public tagsClear() {
@@ -355,13 +391,14 @@ export class Common extends GridLayout {
   }
   private doneSelect() {
     var self = this;
+    this.searchBar.text="";
     self.selected = self.selected_items;
     if (this.render == "tags")
       this.tagsDone();
     else if (this.render == "label" || this.render == "drop")
       this.labelDone();
 
-    if (self.multiple == "true")
+    if (self.multiple == true)
       self.notify({
         eventName: Common.changeEvent,
         object: self,
@@ -384,7 +421,7 @@ export class Common extends GridLayout {
     var self = this;
     this.tagsClear();
 
-    if (self.multiple == "true")
+    if (self.multiple == true)
       self.notify({
         eventName: Common.changeEvent,
         object: self,
@@ -423,9 +460,9 @@ export class Common extends GridLayout {
         args.view.className = "item"
     });
     listView.on("itemTap", function (args) {
-      if (self.multiple == "false" && args.view.className == "item filter-select-selected")
+      if (self.multiple == false && args.view.className == "item filter-select-selected")
         return 0;
-      if (self.multiple == "false")
+      if (self.multiple == false)
         self.selected_items = [];
       if (args.view.className != "item filter-select-selected") {
         args.view.className = "item filter-select-selected";
@@ -448,7 +485,7 @@ export class Common extends GridLayout {
           return args.view.bindingContext[self.primary_key] != item[self.primary_key]
         });
 
-      if (self.multiple == "false")
+      if (self.multiple == false)
         self.doneSelect();
 
 
@@ -467,7 +504,7 @@ export class Common extends GridLayout {
       self.selected_items = [];
       self.closeCallback();
     });
-    if (this.multiple == "false")
+    if (this.multiple == false)
       donebtn.text = 'Clear';
     else
       donebtn.text = 'Done';
@@ -485,7 +522,7 @@ export class Common extends GridLayout {
     GridLayout.setColumn(label, 1);
     GridLayout.setColumn(donebtn, 2);
     gridLayout.className = "action-bar p-10";
-    if (this.multiple == "false")
+    if (this.multiple == false)
       donebtn.on("tap", function (args) {
         if (self.render == "tags") {
           self.selected_items = [];
@@ -494,7 +531,7 @@ export class Common extends GridLayout {
         else {
           self.selected = [];
           self.labelselect.text = self.hint;
-          self.labelselect.className = "filter-select-label hint"
+          self.labelselect.className = "filter-select-label fa hint"
           self.closeCallback();
         }
 
@@ -505,24 +542,24 @@ export class Common extends GridLayout {
           self.doneSelect();
       });
 
-    //this.modalPage.bindingContext = new modalView();
     stackLayout.addChild(gridLayout);
 
-    var searchBar = new SearchBar();
-    searchBar.hint = "search for item";
+    this.searchBar = new SearchBar();
+    this.searchBar.hint = this.searchHint;
     var searchBindingOptions = {
       sourceProperty: "onSubmit",
       targetProperty: "submit",
       twoWay: true
     };
-    searchBar.bind(searchBindingOptions, this);
+    this.searchBar.bind(searchBindingOptions, this);
     var searchBindingOptions2 = {
       sourceProperty: "term",
       targetProperty: "text",
       twoWay: true
     };
-    searchBar.bind(searchBindingOptions2, this);
-    stackLayout.addChild(searchBar);
+    this.searchBar.bind(searchBindingOptions2, this);
+    stackLayout.addChild(this.searchBar);
+    this.searchBar.className = "felter-select-search-bar"
     var hr = new StackLayout();
     hr.className = "hr-light";
     stackLayout.addChild(hr);

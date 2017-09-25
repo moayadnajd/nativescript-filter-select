@@ -1,10 +1,14 @@
 import { GridLayout } from "ui/layouts/grid-layout";
 import { FlexboxLayout } from "ui/layouts/flexbox-layout";
 import { ObservableArray } from "data/observable-array";
+import { SearchBar } from "ui/search-bar";
 export declare class Common extends GridLayout {
+    searchHint: string;
+    searchBar: SearchBar;
+    xbtn: any;
     private _items;
     selected: Array<any>;
-    disabled: string;
+    disabled: any;
     private _selected_items;
     private _selected_layout;
     private _primary_key;

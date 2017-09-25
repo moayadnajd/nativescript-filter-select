@@ -1,5 +1,6 @@
 import { Observable } from 'data/observable';
 import * as fs from 'file-system';
+import { Page } from 'ui/page';
 var documents = fs.knownFolders.currentApp();
 
 class FileReader {
@@ -21,8 +22,9 @@ class FileReader {
   }
 }
 export class LabelModel extends Observable {
-
+  public count = 0;
   private _countries: any[] = [];
+  public hint = "please select ";
 
   public get countries(): any[] {
     return this._countries;
@@ -44,9 +46,9 @@ export class LabelModel extends Observable {
   <Label col="2" class="text-center" text="{{ code }}" textWrap="true" /> 
   </GridLayout>
   `;
-  
+
   public onSelect(args) {
-    console.log('selected array is => ' +JSON.stringify( args.selected));
+    console.log('selected array is => ' + JSON.stringify(args.selected));
   }
 
   constructor() {
@@ -55,6 +57,25 @@ export class LabelModel extends Observable {
       this.countries = data;
       this.Refresh('countries');
     });
+
+
+
+  }
+  public init(page: Page) {
+    let refreshLabel = page.getViewById('refreshLabel');
+    this.changeText(refreshLabel);
+  }
+  public changeText(refreshLabel) {
+    let self = this;
+    console.log("please select => " + self.count);
+    setInterval(function () {
+      self.hint = "please select => " + self.count
+      self.count = self.count + 1;
+      self.Refresh('hint');
+      console.log(self.hint);
+      refreshLabel.refresh();
+    }, 1000);
+
   }
 
   public Refresh(key = null) {

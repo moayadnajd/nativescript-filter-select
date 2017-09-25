@@ -21,4 +21,7 @@ demo-ng/platforms
 demo-ng/node_modules
 *.d.ts
 .DS_Store
+demo/.nsbuildinfo
+demo/.nslivesyncinfo
+demo/app/tns_modules/
 
