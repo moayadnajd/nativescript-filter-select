@@ -20,9 +20,9 @@ import { TextView } from "tns-core-modules/ui/text-view";
 
 
 export class Common extends GridLayout {
-  public searchHint="Search for item";
-  public searchBar:SearchBar;
-  public xbtn:any="x";
+  public searchHint = "Search for item";
+  public searchBar: SearchBar;
+  public xbtn: any = "x";
   private _items: Array<any> = [];
   public selected: Array<any> = [];
   public disabled: any = false
@@ -359,14 +359,14 @@ export class Common extends GridLayout {
     if (self.selected.length > 0) {
       this.labelselect.text = self.selected[0][this.search_param];
       this.labelselect.className = "filter-select-label fa selected"
-    }else{
-    this.labelselect.text=self.hint;
-    this.notify({
-      object: self,
-      eventName: Observable.propertyChangeEvent,
-      propertyName: 'hint',
-      value: self.hint
-    });
+    } else {
+      this.labelselect.text = self.hint;
+      this.notify({
+        object: self,
+        eventName: Observable.propertyChangeEvent,
+        propertyName: 'hint',
+        value: self.hint
+      });
     }
   }
 
@@ -388,7 +388,7 @@ export class Common extends GridLayout {
   }
   private doneSelect() {
     var self = this;
-    this.searchBar.text="";
+
     self.selected = self.selected_items;
     if (this.render == "tags")
       this.tagsDone();
@@ -409,6 +409,10 @@ export class Common extends GridLayout {
       });
 
     self.closeCallback();
+    setTimeout(function () {
+      self.searchBar.text = "";
+    }, 500);
+
   }
 
 
@@ -436,14 +440,16 @@ export class Common extends GridLayout {
     var stackLayout = new StackLayout();
     var gridLayout = new GridLayout();
     var listView = new ListView();
-    this.filterd = new ObservableArray(this.items);
+    if (Object.prototype.toString.call(this.items) == '[object Array]')
+      this.filterd = new ObservableArray(this.items);
+    else
+      this.filterd = <any>this.items;
     var listViewBindingOptions = {
       sourceProperty: "filterd",
       targetProperty: "items",
-      twoWay: true
+      twoWay: false
     };
     listView.bind(listViewBindingOptions, this);
-
 
     this.selected_items = this.selected;
     listView.itemTemplate = this.item_template;
