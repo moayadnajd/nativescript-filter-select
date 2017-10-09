@@ -1,26 +1,22 @@
 import { stack } from 'tns-core-modules/ui/frame';
 import { AbsoluteLayout } from 'tns-core-modules/ui/layouts/absolute-layout/absolute-layout';
-import { Observable } from 'data/observable';
-import * as app from 'application';
-import { LayoutBase } from "ui/layouts/layout-base";
-import { GridLayout } from "ui/layouts/grid-layout";
-import { StackLayout } from "ui/layouts/stack-layout";
-import { FlexboxLayout } from "ui/layouts/flexbox-layout";
-import { ObservableArray } from "data/observable-array";
+import { Observable } from 'tns-core-modules/data/observable';
+import * as app from 'tns-core-modules/application';
+import { LayoutBase } from "tns-core-modules/ui/layouts/layout-base";
+import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
+import { StackLayout } from "tns-core-modules/ui/layouts/stack-layout";
+import { FlexboxLayout } from "tns-core-modules/ui/layouts/flexbox-layout";
+import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { GridUnitType } from "tns-core-modules/ui/layouts/grid-layout";
-import { Label } from "ui/label";
-import { Button } from "ui/button";
-import { SearchBar } from "ui/search-bar";
-import { Repeater } from "ui/repeater";
-import { ItemSpec } from "ui/layouts/grid-layout";
-import { ListView } from "ui/list-view";
-import { LengthPxUnit } from 'ui/styling/style-properties';
-import { ContentView } from 'ui/content-view';
-import view = require('ui/core/view');
-import { Page } from 'ui/page';
-import color = require('color');
-var frame = require('ui/frame');
-import { TextView } from "ui/text-view";
+import { Label } from "tns-core-modules/ui/label";
+import { Button } from "tns-core-modules/ui/button";
+import { SearchBar } from "tns-core-modules/ui/search-bar";
+import { Repeater } from "tns-core-modules/ui/repeater";
+import { ItemSpec } from "tns-core-modules/ui/layouts/grid-layout";
+import { ListView } from "tns-core-modules/ui/list-view";
+import { Page } from 'tns-core-modules/ui/page';
+var frame = require('tns-core-modules/ui/frame');
+import { TextView } from "tns-core-modules/ui/text-view";
 
 
 export class Common extends GridLayout {
@@ -264,7 +260,7 @@ export class Common extends GridLayout {
       var textFieldBindingOptions = {
         sourceProperty: "hint",
         targetProperty: "text",
-        twoWay: true
+        twoWay: false
       };
       this.labelselect.bind(textFieldBindingOptions, this);
 
@@ -287,7 +283,7 @@ export class Common extends GridLayout {
       var textFieldBindingOptions = {
         sourceProperty: "hint",
         targetProperty: "text",
-        twoWay: true
+        twoWay: false
       };
       this.labelselect.bind(textFieldBindingOptions, this);
       if (this.selected.length)
@@ -364,12 +360,13 @@ export class Common extends GridLayout {
       this.labelselect.text = self.selected[0][this.search_param];
       this.labelselect.className = "filter-select-label fa selected"
     }else{
+    this.labelselect.text=self.hint;
     this.notify({
       object: self,
       eventName: Observable.propertyChangeEvent,
       propertyName: 'hint',
       value: self.hint
-    })
+    });
     }
   }
 
