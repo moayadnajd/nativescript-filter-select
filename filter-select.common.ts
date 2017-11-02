@@ -240,7 +240,7 @@ export class Common extends GridLayout {
 
 
     if (this.item_template == null)
-      this.item_template = `<Label col="0" text="{{ ${this._search_param} }}" textWrap="true" />`;
+      this.item_template =  `<Label text="{{ ${this._search_param} }}" textWrap="true" />`;
 
     if (self.selected_flag)
       this.selected = this.items.filter((item) => {
@@ -278,7 +278,7 @@ export class Common extends GridLayout {
 
     } else if (this.render == "drop") {
       this.multiple = false;
-      this.labelselect = this.parseOptions(new Label, { className: "filter-select-label fa hint", text: this.hint });
+      this.labelselect = this.parseOptions(new Label, {col:"0", className: "filter-select-label fa hint", text: this.hint });
 
       var textFieldBindingOptions = {
         sourceProperty: "hint",
@@ -296,13 +296,11 @@ export class Common extends GridLayout {
         }
       });
 
-      let dropholder = <StackLayout>this.parseOptions(new StackLayout, { className: "filter-select-drop-holder" });
+      let dropholder = <GridLayout>this.parseOptions(new GridLayout, {rows:["auto"], columns:["star", "auto"] , className: "filter-select-drop-holder" });
 
-      dropholder.addChild(this.labelselect)
-      dropholder.orientation = "horizontal";
-      let nsicon = this.parseOptions(new Label, { className: "fa filter-select-icon", text: "\uf0d7" });
+      dropholder.addChild(this.labelselect);
+      let nsicon = this.parseOptions(new Label, { col:"1",className: "fa filter-select-icon", text: "\uf0d7" });
       dropholder.addChild(nsicon)
-      nsicon.horizontalAlignment = "right";
       this.addChild(dropholder);
       dropholder.horizontalAlignment = "center";
 
