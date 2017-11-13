@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.demo",
+    "id": "com.codeobia.filterselectdemo",
     "tns-ios": {
       "version": "3.0.1"
     },
@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "nativescript-filter-select": "*",
+    "nativescript-filter-select": "file:///var/www/nativescript/plugins/nativescript-filter-select",
     "nativescript-fonticon": "^1.1.1",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "^0.3.4",
