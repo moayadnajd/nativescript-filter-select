@@ -64,123 +64,43 @@ elementRegistryModule.registerElement("FilterSelect", () => require("nativescrip
 
 ## Attributes
 
+### see [demo](https://github.com/moayadnajd/nativescript-filter-select/tree/master/demo) examples for more information
+
 | Attribute |                               Description                    |Default 
 | ------------- | ------------------------------------------------------- |--------
-|   render      | to render to "tags" or "label"                          | string : tags 
+|   render      | to render  "tags" or "label" or "drop"                  | string : tags 
 |   multiple    | to limit the options selected to one if set to false       | boolean : true
-| selected_flag   | index of selected boolean flag to mark item as selected     | boolean : optional 
 |search_param| index  of the string value in the items object to search on it  |string : name
 |item_template|xml template for the listview items | string : `<Label col="0" text="{{ ${this._search_param} }}" textWrap="true" />`
-|change| change event  treger when select done | function : optional `change(args)` and selected item can be accessed as `args.selected`
+|change| change event  treger when select is done | function : optional `change(args)` and selected item can be accessed as `args.selected`
 |modal_title|title of the filter modal | String : `Please select items`
 |hint|string to show when no items selected |`Please select some items`
 |items|array of objects to populate the list of options | Array :[]
 |primary_key|unique index of the items object | string : `id`
 |selected|array of objects to mark some options as selected and it will be the result when select is done | Array: []
+|disabeld| to disable select botton | boolean : false
+|refresh| to refresh the filter select with new values good with remote data | function
+|searchHint | search placeholder or hint in the items modal | "Search for item"
+|xbtn| remove tag text you can use tag icon here | "x"
 
-### CSS
-```CSS
-FilterSelect{
-    border-style: solid;
-    padding: 3;
-    border-width: 1;
-    border-color: #ccc;
-    border-radius: 5; 
-}
-.btn-filter-select{
-   vertical-align: middle;
-   align-content: center;
-   margin: 0;
-   padding: 1;
-}
+### CSS core-theme styles is required if you dont have them just make your own 
 
-.filter-select-tag-delete{
-    padding: 0;
-    margin: 0;
-    background-color: white;
-    height:20;
-    width: 20;
-    text-align: center;
-    border-color: white;
-    color:red;
-}
+see [app.css](https://github.com/moayadnajd/nativescript-filter-select/blob/master/demo/app/app.css) and [label.css}(https://github.com/moayadnajd/nativescript-filter-select/blob/master/demo/app/pages/label/label.css) 
 
-.filter-select-tag label{
-   height: 100;
-}
-.filter-select-tag{
+* and don't forget to share with us your nice styles :D
 
-    margin-left: 8;
-    border-width: 1;
-    border-color: #ccc;
-    border-radius: 5;
-    padding: 6;
+### font icons 
 
+* font icons are required if you are using dropdown render
 
-}
-
-
-.felter-select-list label{
-  padding: 20;
-}
-
-.felter-select-list{
-  margin: 2;
-}
-.filter-select-hint{
-vertical-align: middle;
-text-align: center;
-margin-top: 8;
-}
-
-.item.filter-select-selected{
-    border-width: 1;
-    border-color: green;
-}
-
-```
-### CSS core-theme styles if you dont have them just make your own 
-```CSS
-
-.action-bar-title{
-
-}
-
-.text-center{
-
-}
-.text-left{
-
-}
-.text-right{
-
-}
-
-.action-bar{
-
-}
-
-.p-10{
-
-}
-
-.hr-light{
-
-}
-
-.btn{
-
-} 
-
-.btn-primary{
-    
-}
-```
+  and you can add fontawsome icon as a select triger ( hint="{{'fa-list-ul' | fonticon}}" ) 
+  
+  see [demo](https://github.com/moayadnajd/nativescript-filter-select/tree/master/demo)
 
 ### For contributing 
-just do a pull request with description of your changes
+just do a pull request with description of your changes or open issue with your ideas 
 
-## need help with [this issue](https://github.com/moayadnajd/nativescript-filter-select/issues/5)
+### i need help with [this issue](https://github.com/moayadnajd/nativescript-filter-select/issues/5)
 
 
 

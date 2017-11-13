@@ -1,4 +1,5 @@
 import { Observable } from 'data/observable';
+import { ObservableArray } from 'data/observable-array';
 import * as fs from 'file-system';
 import frameModule = require("tns-core-modules/ui/frame");
 var documents = fs.knownFolders.currentApp();
@@ -24,7 +25,7 @@ class FileReader {
 export class HelloWorldModel extends Observable {
 
   private _countries: any[] = [];
-
+public remote_countries :ObservableArray<any> = new ObservableArray([]);
   public get countries(): any[] {
     return this._countries;
   }
@@ -56,6 +57,17 @@ export class HelloWorldModel extends Observable {
       this.countries = data;
       this.Refresh('countries');
     });
+  }
+
+  init(){
+    setTimeout(()=>{
+      FileReader.readJSON('countries.json').then((data: any) => {
+        data.forEach((item)=>{
+          this.remote_countries.push(item);
+        });
+      });
+    },3000)
+    
   }
 
   public Refresh(key = null) {

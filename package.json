@@ -1,6 +1,6 @@
 {
   "name": "nativescript-filter-select",
-  "version": "1.1.5",
+  "version": "1.1.9",
   "description": "Your awesome NativeScript plugin for select and filter items for a list.",
   "main": "filter-select",
   "typings": "index.d.ts",

@@ -1,10 +1,14 @@
-import { GridLayout } from "ui/layouts/grid-layout";
-import { FlexboxLayout } from "ui/layouts/flexbox-layout";
-import { ObservableArray } from "data/observable-array";
+import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
+import { FlexboxLayout } from "tns-core-modules/ui/layouts/flexbox-layout";
+import { ObservableArray } from "tns-core-modules/data/observable-array";
+import { SearchBar } from "tns-core-modules/ui/search-bar";
 export declare class Common extends GridLayout {
+    searchHint: string;
+    searchBar: SearchBar;
+    xbtn: any;
     private _items;
     selected: Array<any>;
-    disabled: string;
+    disabled: any;
     private _selected_items;
     private _selected_layout;
     private _primary_key;
