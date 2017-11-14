@@ -43,6 +43,7 @@ export class Common extends GridLayout {
   private _hint: string = "Please select some items";
   private _selected_flag: string;
   private multiple: any = true;
+  private allowSearch: any = true;
   public static changeEvent: string = "change";
 
   public get selected_flag(): string {
@@ -231,6 +232,11 @@ export class Common extends GridLayout {
       this.multiple = false
     if (this.multiple == "true")
       this.multiple = true
+
+      if (this.allowSearch == "false")
+          this.allowSearch = false
+      if (this.allowSearch == "true")
+          this.allowSearch = true
 
     if (this.disabled == "true")
       this.disabled = true
@@ -559,7 +565,8 @@ export class Common extends GridLayout {
       twoWay: true
     };
     this.searchBar.bind(searchBindingOptions2, this);
-    stackLayout.addChild(this.searchBar);
+    if(this.allowSearch)
+      stackLayout.addChild(this.searchBar);
     this.searchBar.className = "felter-select-search-bar"
     var hr = new StackLayout();
     hr.className = "hr-light";

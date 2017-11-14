@@ -25,7 +25,12 @@
     <StackLayout class="hr-light m-10" />
     <FS:FilterSelect multiple="false"  items="{{ countries }}" item_template="{{ item_template }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code" change="{{ onSelect }}" />
 
-    <Label class="h2" text="select disabled" textWrap="true" />
+      <Label class="m-t-20 h2" text="Select with no search bar option" textWrap="true" />
+      <StackLayout class="hr-light m-10" />
+      <FS:FilterSelect multiple="false"  items="{{ countries }}" allowSearch="false" item_template="{{ item_template }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code" change="{{ onSelect }}" />
+
+
+      <Label class="h2" text="select disabled" textWrap="true" />
      <StackLayout class="hr-light m-10" />
      <FS:FilterSelect class="disabled" disabled="disabled" items="{{ countries }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code"  change="{{ onSelect }}"  />
      

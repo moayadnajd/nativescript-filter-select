@@ -79,6 +79,7 @@ elementRegistryModule.registerElement("FilterSelect", () => require("nativescrip
 |primary_key|unique index of the items object | string : `id`
 |selected|array of objects to mark some options as selected and it will be the result when select is done | Array: []
 |disabeld| to disable select botton | boolean : false
+|allowSearch| to enable/disable search bar in the modal | boolean : true
 |refresh| to refresh the filter select with new values good with remote data | function
 |searchHint | search placeholder or hint in the items modal | "Search for item"
 |xbtn| remove tag text you can use tag icon here | "x"
