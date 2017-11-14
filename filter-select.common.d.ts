@@ -26,6 +26,7 @@ export declare class Common extends GridLayout {
     private _hint;
     private _selected_flag;
     private multiple;
+    private allowSearch;
     static changeEvent: string;
     selected_flag: string;
     search_param: string;
