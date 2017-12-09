@@ -83,6 +83,11 @@ elementRegistryModule.registerElement("FilterSelect", () => require("nativescrip
 |refresh| to refresh the filter select with new values good with remote data | function
 |searchHint | search placeholder or hint in the items modal | "Search for item"
 |xbtn| remove tag text you can use tag icon here | "x"
+|closeText| close button text | "Close"
+|doneText| done button text | "Done"
+|clearText| clear button text | "Clear"
+|selectText| select button text | "Select"
+
 
 ### CSS core-theme styles is required if you dont have them just make your own 
 
