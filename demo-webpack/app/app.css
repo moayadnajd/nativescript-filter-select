@@ -1,0 +1,78 @@
+﻿/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme. 
+The imported CSS rules must precede all other types of rules.
+*/
+@import 'nativescript-theme-core/css/core.light.css';
+
+FilterSelect{
+    border-style: solid;
+    padding: 3;
+    border-width: 1;
+    border-color: #ccc;
+    border-radius: 5; 
+}
+.btn-filter-select{
+   vertical-align: middle;
+   align-content: center;
+   margin: 0;
+   padding: 1;
+}
+.fa {
+  font-family: FontAwesome, fontawesome-webfont;
+}
+
+.filter-select-tag-delete{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    height:20;
+    width: 20;
+    text-align: center;
+    border-color: white;
+    color:red;
+}
+
+.filter-select-tag label{
+   height: 100;
+}
+.filter-select-tag{
+   
+    margin-left: 8;
+    border-width: 1;
+    border-color: #ccc;
+    border-radius: 5; 
+    padding: 6;
+  
+    
+}
+
+
+.felter-select-list label{
+  padding: 20;
+}
+
+.felter-select-list{
+  margin: 2;
+}
+.filter-select-hint{
+vertical-align: middle;
+text-align: center;
+margin-top: 8;
+}
+
+FilterSelect.disabled{
+    background-color:#ccc;
+}
+
+.item.filter-select-selected{
+    border-width: 1;
+    border-color: green;
+}
