@@ -33,3 +33,4 @@ demo-webpack/*.d.ts
 !demo-webpack/references.d.ts
 demo-webpack/platforms
 demo-webpack/node_modules
+demo-webpack/app/vendor*
