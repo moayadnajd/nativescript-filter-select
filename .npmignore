@@ -1,5 +1,6 @@
 demo/
 demo-ng/
+demo-webpack/
 screenshots/
 node_modules/
 scripts/

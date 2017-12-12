@@ -25,3 +25,11 @@ demo/.nsbuildinfo
 demo/.nslivesyncinfo
 demo/app/tns_modules/
 
+
+demo-webpack/app/*.js
+!demo-webpack/karma.conf.js
+!demo-webpack/app/tests/*.js
+demo-webpack/*.d.ts
+!demo-webpack/references.d.ts
+demo-webpack/platforms
+demo-webpack/node_modules
