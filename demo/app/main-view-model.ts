@@ -1,6 +1,7 @@
 import { Observable } from 'data/observable';
 import { ObservableArray } from 'data/observable-array';
 import * as fs from 'file-system';
+import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout';
 import frameModule = require("tns-core-modules/ui/frame");
 var documents = fs.knownFolders.currentApp();
 
@@ -23,7 +24,7 @@ class FileReader {
   }
 }
 export class HelloWorldModel extends Observable {
-
+public page :StackLayout;
   private _countries: any[] = [];
 public remote_countries :ObservableArray<any> = new ObservableArray([]);
   public get countries(): any[] {
@@ -82,7 +83,11 @@ public remote_countries :ObservableArray<any> = new ObservableArray([]);
 
   }
 
+public openmodal(args){
+  let myFilterSelect = <any> this.page.getViewById('myFilterSelect');
 
+  myFilterSelect.open();
+}
   public openpage(args){
     var navigationEntry = {
       moduleName: args.object.pageName,

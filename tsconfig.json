@@ -38,6 +38,7 @@
     "exclude": [
         "demo",
         "demo-ng",
+        "demo-webpack",
         "node_modules"
     ],
     "compileOnSave": false

@@ -49,6 +49,7 @@ export declare class Common extends GridLayout {
     constructor();
     renderTags(): FlexboxLayout;
     init(): void;
+    open(): void;
     renderTagsHolder(): GridLayout;
     tagsDone(): void;
     labelDone(): void;

@@ -38,6 +38,10 @@
      <StackLayout class="hr-light m-10" />
      <FS:FilterSelect  items="{{ countries }}" closeText="إغلاق" searchHint="بحث" doneText="تم" clearText="مسح" selectText="إختر" hint="اختر الدوله" modal_title="الدول" search_param="name" primary_key="code"  change="{{ onSelect }}"  />
      
+     <Label class="h2" tap="{{ openmodal }}" color="blue" text="open by tap here" textWrap="true" />
+     <StackLayout class="hr-light m-10" />
+     <FS:FilterSelect id="myFilterSelect"  items="{{ countries }}"  search_param="name" primary_key="code"  change="{{ onSelect }}"  />
+     
   </StackLayout>
   </ScrollView>
 </Page>
