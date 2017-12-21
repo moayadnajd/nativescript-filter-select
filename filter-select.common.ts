@@ -509,9 +509,9 @@ export class Common extends GridLayout {
     var donebtn = new Button();
     var closebtn = new Button();
     label.text = this.modal_title;
-    label.className = "action-bar-title text-center";
+    label.className = "action-bar-title filter-select-modal-title text-center";
     closebtn.text = self.closeText;
-    closebtn.className = "action-item text-left";
+    closebtn.className = "action-item filter-select-modal-left text-left";
     closebtn.on("tap", function(args) {
       self.selected_items = [];
       self.closeCallback();
@@ -519,11 +519,11 @@ export class Common extends GridLayout {
     if (this.multiple == false) donebtn.text = self.clearText;
     else donebtn.text = self.doneText;
 
-    donebtn.className = "action-item text-right";
+    donebtn.className = "action-item text-right filter-select-modal-right";
     gridLayout.addRow(new ItemSpec(1, "auto"));
-    gridLayout.addColumn(new ItemSpec(70, "pixel"));
+    gridLayout.addColumn(new ItemSpec(1, "auto"));
     gridLayout.addColumn(new ItemSpec(1, "star"));
-    gridLayout.addColumn(new ItemSpec(70, "pixel"));
+    gridLayout.addColumn(new ItemSpec(1, "auto"));
     gridLayout.addChild(label);
     gridLayout.addChild(closebtn);
 
