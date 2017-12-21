@@ -270,13 +270,7 @@ export class Common extends GridLayout {
       if (this.selected.length) this.labelDone();
       this.on(Button.tapEvent, arg => {
         if (self.disabled == false) {
-          self.currentPage = frame.topmost().currentPage;
-          self.currentPage.showModal(
-            self.modal(),
-            "",
-            function closeCallback() {},
-            true
-          );
+          this.open();
         }
       });
       this.addChild(this.labelselect);
@@ -297,13 +291,7 @@ export class Common extends GridLayout {
       if (this.selected.length) this.labelDone();
       this.on(Button.tapEvent, arg => {
         if (self.disabled == false) {
-          self.currentPage = frame.topmost().currentPage;
-          self.currentPage.showModal(
-            self.modal(),
-            "",
-            function closeCallback() {},
-            true
-          );
+          self.open();
         }
       });
 
@@ -324,7 +312,16 @@ export class Common extends GridLayout {
       dropholder.horizontalAlignment = "center";
     }
   }
-
+  public open() {
+    let self = this;
+    self.currentPage = frame.topmost().currentPage;
+    self.currentPage.showModal(
+      self.modal(),
+      "",
+      function closeCallback() {},
+      true
+    );
+  }
   renderTagsHolder() {
     let self = this;
     var button = new Button();
@@ -334,13 +331,7 @@ export class Common extends GridLayout {
       Button.tapEvent,
       function(eventData) {
         if (self.disabled == false) {
-          self.currentPage = frame.topmost().currentPage;
-          self.currentPage.showModal(
-            self.modal(),
-            "",
-            function closeCallback() {},
-            true
-          );
+          self.open();
         }
       },
       this
