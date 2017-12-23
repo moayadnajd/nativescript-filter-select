@@ -1,0 +1,87 @@
+FilterSelect{
+    border-style: solid;
+    padding: 3;
+    border-width: 1;
+    border-color: #ccc;
+    border-radius: 5; 
+}
+.btn-filter-select{
+   vertical-align: top;
+   align-content: center;
+   margin: 0;
+   padding: 1;
+}
+.fa {
+  font-family: FontAwesome, fontawesome-webfont;
+}
+
+.filter-select-tag-delete{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    height:20;
+    width: 20;
+    text-align: center;
+    border-color: white;
+    color:red;
+}
+
+
+.filter-select-tag{
+    margin:5;
+    margin-left: 8;
+    border-width: 1;
+    border-color: #ccc;
+    padding: 6;
+    height: auto;
+    border-radius: 20;
+    border-color: #ccc;
+    border-width: 1;
+}
+.filter-select-tag-label{
+    horizontal-align: right;
+}
+
+
+.filter-select-list label{
+  padding: 20;
+}
+
+.filter-select-list{
+  margin: 2;
+}
+.filter-select-hint{
+vertical-align: middle;
+text-align: center;
+margin-top: 8;
+}
+
+FilterSelect.disabled{
+    background-color:#ccc;
+}
+
+.item.filter-select-selected{
+    border-width: 1;
+    border-color: green;
+}
+
+
+.filter-select-label{
+    height: auto;
+    padding: 5;
+}
+.filter-select-label.hint{
+    color:rgb(82, 82, 82);
+}
+.filter-select-label.selected{
+   color:black;
+}
+.filter-select-icon{
+    margin-left:10;
+    width: 10;
+    horizontal-align:left; 
+}
+
+FilterSelect.disabled{
+    background-color:#ccc;
+}

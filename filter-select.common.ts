@@ -17,10 +17,12 @@ import { ListView } from "tns-core-modules/ui/list-view";
 import { Page } from "tns-core-modules/ui/page";
 var frame = require("tns-core-modules/ui/frame");
 import { TextView } from "tns-core-modules/ui/text-view";
+import { isAndroid } from "tns-core-modules/platform";
 
 export class Common extends GridLayout {
   public searchHint = "Search for item";
   public searchBar: SearchBar;
+  public autofocus :any = false;
   public xbtn: any = "x";
   private _items: Array<any> = [];
   public selected: Array<any> = [];
@@ -167,7 +169,7 @@ export class Common extends GridLayout {
     flexboxLayout.flexGrow = 1;
     if (this.selected.length)
       this.selected.forEach(item => {
-        var grid = new GridLayout();
+        var grid = new StackLayout();
         let btn = new Button();
         var textFieldBindingOptions = {
           sourceProperty: "xbtn",
@@ -176,27 +178,15 @@ export class Common extends GridLayout {
         };
         btn.bind(textFieldBindingOptions, this);
         btn.text = self.xbtn;
-        btn.horizontalAlignment = "left";
         btn.set("toDelete", item[self.primary_key]);
-        btn.width = 10;
         let label = new Label();
-        let stack = new StackLayout();
         label.text = item[self.search_param];
-        label.fontSize = 18;
-        label.height = "auto";
-        label.padding = 1;
-        label.width = "auto";
         label.textWrap = true;
-        stack.addChild(label);
-        stack.orientation = "vertical";
-        GridLayout.setColumn(stack, 1);
-        GridLayout.setColumn(btn, 0);
-
-        grid.addColumn(new ItemSpec(1, "auto"));
-        grid.addColumn(new ItemSpec(1, "auto"));
-
-        grid.addChild(stack);
+        label.className="filter-select-tag-label";
+        grid.orientation="horizontal";
         grid.addChild(btn);
+        grid.addChild(label);
+        
         flexboxLayout.addChild(grid);
         grid.className = "filter-select-tag";
         btn.className = "fa filter-select-tag-delete";
@@ -230,7 +220,9 @@ export class Common extends GridLayout {
 
     if (this.multiple == "false") this.multiple = false;
     if (this.multiple == "true") this.multiple = true;
-
+    if (this.autofocus == "false") this.autofocus = false;
+    if (this.autofocus == "true") this.autofocus = true;
+    
     if (this.allowSearch == "false") this.allowSearch = false;
     if (this.allowSearch == "true") this.allowSearch = true;
 
@@ -279,7 +271,8 @@ export class Common extends GridLayout {
       this.labelselect = this.parseOptions(new Label(), {
         col: "0",
         className: "filter-select-label fa hint",
-        text: this.hint
+        text: this.hint,
+        textWrap:"true"
       });
 
       var textFieldBindingOptions = {
@@ -552,6 +545,7 @@ export class Common extends GridLayout {
     stackLayout.addChild(gridLayout);
 
     this.searchBar = new SearchBar();
+    this.searchBar.id="filter-select-search-bar"
     this.searchBar.hint = this.searchHint;
     var searchBindingOptions = {
       sourceProperty: "onSubmit",
@@ -566,17 +560,35 @@ export class Common extends GridLayout {
     };
     this.searchBar.bind(searchBindingOptions2, this);
     if (this.allowSearch) stackLayout.addChild(this.searchBar);
-    this.searchBar.className = "felter-select-search-bar";
+    this.searchBar.className = "filter-select-search-bar";
+    
     var hr = new StackLayout();
     hr.className = "hr-light";
     stackLayout.addChild(hr);
     (<any>listView).height = "100%";
     stackLayout.addChild(listView);
-    listView.className = "felter-select-list";
+    listView.className = "filter-select-list";
     this.modalPage.content = stackLayout;
+    this.modalPage.on("loaded", function(args) {
+      let page = <StackLayout> args.object;
+      let myFilterSelectSearchbar = <SearchBar> page.getViewById('filter-select-search-bar');
+      if(isAndroid && self.autofocus == false && self.allowSearch)
+      {
+        console.log('->>>>>>>>>>this.modalPage.on("loaded", function(args)');
+        myFilterSelectSearchbar.android.clearFocus();
+      }
+
+      if(!isAndroid && self.autofocus == true && self.allowSearch){
+        myFilterSelectSearchbar.focus();
+      }
+
+    });
     this.modalPage.on("showingModally", function(args) {
       self.selected_items = self.selected;
       self.closeCallback = args.closeCallback;
+  
+    
+   
     });
     this.listnToSearch();
     return this.modalPage;

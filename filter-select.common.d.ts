@@ -5,6 +5,7 @@ import { SearchBar } from "tns-core-modules/ui/search-bar";
 export declare class Common extends GridLayout {
     searchHint: string;
     searchBar: SearchBar;
+    autofocus: any;
     xbtn: any;
     private _items;
     selected: Array<any>;

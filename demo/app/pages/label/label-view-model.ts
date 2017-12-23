@@ -8,12 +8,10 @@ class FileReader {
     var jsonFile = documents.getFile(path);
     return new Promise((resolve, reject) => {
       try {
-
         jsonFile.readText().then((content: string) => {
           let data = JSON.parse(content);
           resolve(data);
         });
-
       }
       catch (err) {
         reject(err);
@@ -33,7 +31,6 @@ export class LabelModel extends Observable {
   public set countries(value: any[]) {
     this._countries = value;
   }
-
   public selected = [{ "name": "Jordan", "code": "JO" }];
 
   public item_template = `

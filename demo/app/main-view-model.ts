@@ -10,12 +10,10 @@ class FileReader {
     var jsonFile = documents.getFile(path);
     return new Promise((resolve, reject) => {
       try {
-
         jsonFile.readText().then((content: string) => {
           let data = JSON.parse(content);
           resolve(data);
         });
-
       }
       catch (err) {
         reject(err);

@@ -7,12 +7,6 @@
       <Label class="h2" text="label" textWrap="true" />
       <StackLayout class="hr-light m-10" />
       <FS:FilterSelect render="label" selected="{{ selected }}" items="{{ countries }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code" change="{{ onSelect }}" />
-      <Label class="h2" text="dropdown css" textWrap="true" />
-      <StackLayout class="hr-light m-10" />
-      <GridLayout class="dropdown" rows="auto" columns="*,auto">
-        <FS:FilterSelect col="0" render="label" items="{{ countries }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code" change="{{ onSelect }}" />
-        <Label col="1" class="fa ficon" text="{{'fa-caret-down' | fonticon}}"></Label>
-      </GridLayout>
       <Label class="h2" text="dropdown render" textWrap="true" />
       <StackLayout class="hr-light m-10" />
       <FS:FilterSelect class="drop-down" col="0" render="drop" items="{{ countries }}" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code" change="{{ onSelect }}" />

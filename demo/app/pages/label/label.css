@@ -1,41 +1,4 @@
 FilterSelect{
-    border-width: 0;
-    border-color: #ccc;
-  
-    text-align:center;
+    text-align: center;
 }
 
-.dropdown{
-     border-width: 1;
-     border-color: #ccc;
-     border-radius:20;
-}
-
-.ficon{
-    padding-right:40;
-   
-}
-
-.filter-select-label{
-    color:green;
-    width: 100%;
-}
-.filter-select-label.hint{
-    color:blue;
-    width: 100%;
-}
-
-.filter-select-icon{
-    margin-left:10;
-    width: 10;
-    horizontal-align:right; 
-}
-FilterSelect.drop-down{
-    border-width: 1;
-    border-color: #ccc;
-    padding: 10;
-}
-
-FilterSelect.disabled{
-    background-color:#ccc;
-}
