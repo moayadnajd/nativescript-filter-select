@@ -16,6 +16,8 @@ Sample 1 |  Sample 2
 ##### NativeScript 3.x
 - `tns plugin add nativescript-filter-select`
 
+## import css  
+` @import 'nativescript-filter-select/styles.css'; `
 
 *Be sure to run a new build after adding plugins to avoid any issues
 ## Vanilla NativeScript
@@ -75,7 +77,7 @@ elementRegistryModule.registerElement("FilterSelect", () => require("nativescrip
 |change| change event  treger when select is done | function : optional `change(args)` and selected item can be accessed as `args.selected`
 |modal_title|title of the filter modal | String : `Please select items`
 |hint|string to show when no items selected |`Please select some items`
-|items|array of objects to populate the list of options | Array :[]
+|items|array of objects to populate the list of options | ObservableArray :[]
 |primary_key|unique index of the items object | string : `id`
 |selected|array of objects to mark some options as selected and it will be the result when select is done | Array: []
 |disabeld| to disable select botton | boolean : false
@@ -87,11 +89,13 @@ elementRegistryModule.registerElement("FilterSelect", () => require("nativescrip
 |doneText| done button text | "Done"
 |clearText| clear button text | "Clear"
 |selectText| select button text | "Select"
+| autofocus | keyboard up when you open modal so you can start search | false
+| open() | open modal programmatically | function
 
 
-### CSS core-theme styles is required if you dont have them just make your own 
+### CSS core-theme styles is required for modal page if you dont have them just make your own 
 
-see [app.css](https://github.com/moayadnajd/nativescript-filter-select/blob/master/demo/app/app.css) and [label.css}(https://github.com/moayadnajd/nativescript-filter-select/blob/master/demo/app/pages/label/label.css) 
+see [styles.css](https://github.com/moayadnajd/nativescript-filter-select/blob/master/styles.css) so you can override or make your own 
 
 * and don't forget to share with us your nice styles :D
 
