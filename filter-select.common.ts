@@ -492,8 +492,11 @@ export class Common extends GridLayout {
           );
         });
 
-      if (self.multiple == false) self.doneSelect();
-
+      if (self.multiple == false){
+        setTimeout(() => {
+          self.doneSelect();
+        }, 500);
+      } 
       listView.refresh();
       return true;
     });
