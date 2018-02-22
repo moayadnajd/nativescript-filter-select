@@ -494,7 +494,7 @@ export class Common extends GridLayout {
         });
 
       if (self.multiple == false) self.doneSelect();
-      
+
       listView.refresh();
       return true;
     });
@@ -536,6 +536,11 @@ export class Common extends GridLayout {
           self.labelselect.text = self.hint;
           self.labelselect.className = "filter-select-label fa hint";
           self.closeCallback();
+          self.notify({
+            eventName: Common.changeEvent,
+            object: self,
+            selected: self.selected
+          });
         }
       });
     else
@@ -575,7 +580,6 @@ export class Common extends GridLayout {
       let myFilterSelectSearchbar = <SearchBar> page.getViewById('filter-select-search-bar');
       if(isAndroid && self.autofocus == false && self.allowSearch)
       {
-        console.log('->>>>>>>>>>this.modalPage.on("loaded", function(args)');
         myFilterSelectSearchbar.android.clearFocus();
       }
 
