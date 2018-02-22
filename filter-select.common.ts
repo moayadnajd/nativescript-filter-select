@@ -468,7 +468,8 @@ export class Common extends GridLayout {
         args.view.className == "item filter-select-selected"
       )
         return 0;
-      if (self.multiple == false) self.selected_items = [];
+      if (self.multiple == false) 
+      self.selected_items.splice(0,self.selected_items.length);
       if (args.view.className != "item filter-select-selected") {
         args.view.className = "item filter-select-selected";
         if (self.selected_flag)
@@ -492,11 +493,8 @@ export class Common extends GridLayout {
           );
         });
 
-      if (self.multiple == false){
-        setTimeout(() => {
-          self.doneSelect();
-        }, 500);
-      } 
+      if (self.multiple == false) self.doneSelect();
+      
       listView.refresh();
       return true;
     });
@@ -509,7 +507,7 @@ export class Common extends GridLayout {
     closebtn.text = self.closeText;
     closebtn.className = "action-item filter-select-modal-left text-left";
     closebtn.on("tap", function(args) {
-      self.selected_items = [];
+      self.selected_items.splice(0,self.selected_items.length)
       self.closeCallback();
     });
     if (this.multiple == false) donebtn.text = self.clearText;
@@ -531,10 +529,10 @@ export class Common extends GridLayout {
     if (this.multiple == false)
       donebtn.on("tap", function(args) {
         if (self.render == "tags") {
-          self.selected_items = [];
+          self.selected_items.splice(0,self.selected_items.length)
           self.doneSelect();
         } else {
-          self.selected = [];
+          self.selected.splice(0,self.selected.length)
           self.labelselect.text = self.hint;
           self.labelselect.className = "filter-select-label fa hint";
           self.closeCallback();
