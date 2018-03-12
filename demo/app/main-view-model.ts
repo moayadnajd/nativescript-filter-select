@@ -22,9 +22,9 @@ class FileReader {
   }
 }
 export class HelloWorldModel extends Observable {
-public page :StackLayout;
+  public page: StackLayout;
   private _countries: any[] = [];
-public remote_countries :ObservableArray<any> = new ObservableArray([]);
+  public remote_countries: ObservableArray<any> = new ObservableArray([]);
   public get countries(): any[] {
     return this._countries;
   }
@@ -45,9 +45,9 @@ public remote_countries :ObservableArray<any> = new ObservableArray([]);
   <Label col="2" class="text-center" text="{{ code }}" textWrap="true" /> 
   </GridLayout>
   `;
-  
+
   public onSelect(args) {
-    console.log('selected array is => ' +JSON.stringify( args.selected));
+    console.log('selected array is => ' + JSON.stringify(args.selected));
   }
 
   constructor() {
@@ -58,17 +58,20 @@ public remote_countries :ObservableArray<any> = new ObservableArray([]);
     });
   }
 
-  init(){
-    setTimeout(()=>{
+  init() {
+    setTimeout(() => {
       FileReader.readJSON('countries.json').then((data: any) => {
-        data.forEach((item)=>{
+        data.forEach((item) => {
           this.remote_countries.push(item);
         });
       });
-    },3000)
-    
-  }
+    }, 3000)
 
+  }
+  public clear() {
+    let myFilterSelectToClear = <any>this.page.getViewById('myFilterSelectToClear');
+    myFilterSelectToClear.Clear();
+  }
   public Refresh(key = null) {
     var self = this;
     this.notify({
@@ -81,19 +84,19 @@ public remote_countries :ObservableArray<any> = new ObservableArray([]);
 
   }
 
-public openmodal(args){
-  let myFilterSelect = <any> this.page.getViewById('myFilterSelect');
+  public openmodal(args) {
+    let myFilterSelect = <any>this.page.getViewById('myFilterSelect');
 
-  myFilterSelect.open();
-}
-  public openpage(args){
+    myFilterSelect.open();
+  }
+  public openpage(args) {
     var navigationEntry = {
       moduleName: args.object.pageName,
       context: this,
       animated: true
-  };
-  
-  frameModule.topmost().navigate(navigationEntry);
+    };
+
+    frameModule.topmost().navigate(navigationEntry);
   }
 
 }

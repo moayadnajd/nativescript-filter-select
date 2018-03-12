@@ -22,7 +22,7 @@ import { isAndroid } from "tns-core-modules/platform";
 export class Common extends GridLayout {
   public searchHint = "Search for item";
   public searchBar: SearchBar;
-  public autofocus :any = false;
+  public autofocus: any = false;
   public xbtn: any = "x";
   private _items: Array<any> = [];
   public selected: Array<any> = [];
@@ -156,11 +156,13 @@ export class Common extends GridLayout {
 
     var self = this;
 
-    setTimeout(function() {
+    setTimeout(function () {
       self.init();
     }, 1);
   }
-
+  private isFunction(functionToCheck) {
+    return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+  }
   public renderTags() {
     var self = this;
     let flexboxLayout = new FlexboxLayout();
@@ -182,17 +184,17 @@ export class Common extends GridLayout {
         let label = new Label();
         label.text = item[self.search_param];
         label.textWrap = true;
-        label.className="filter-select-tag-label";
-        grid.orientation="horizontal";
+        label.className = "filter-select-tag-label";
+        grid.orientation = "horizontal";
         grid.addChild(btn);
         grid.addChild(label);
-        
+
         flexboxLayout.addChild(grid);
         grid.className = "filter-select-tag";
         btn.className = "fa filter-select-tag-delete";
         btn.on(
           Button.tapEvent,
-          function(args) {
+          function (args) {
             if (self.disabled == false) {
               self.selected.forEach((item, index) => {
                 if (item[self.primary_key] == args.object.get("toDelete"))
@@ -222,7 +224,7 @@ export class Common extends GridLayout {
     if (this.multiple == "true") this.multiple = true;
     if (this.autofocus == "false") this.autofocus = false;
     if (this.autofocus == "true") this.autofocus = true;
-    
+
     if (this.allowSearch == "false") this.allowSearch = false;
     if (this.allowSearch == "true") this.allowSearch = true;
 
@@ -233,7 +235,7 @@ export class Common extends GridLayout {
     if (this.item_template == null)
       this.item_template = `<Label text="{{ ${
         this._search_param
-      } }}" textWrap="true" />`;
+        } }}" textWrap="true" />`;
 
     if (self.selected_flag)
       this.selected = this.items.filter(item => {
@@ -272,7 +274,7 @@ export class Common extends GridLayout {
         col: "0",
         className: "filter-select-label fa hint",
         text: this.hint,
-        textWrap:"true"
+        textWrap: "true"
       });
 
       var textFieldBindingOptions = {
@@ -311,9 +313,14 @@ export class Common extends GridLayout {
     self.currentPage.showModal(
       self.modal(),
       "",
-      function closeCallback() {},
+      function closeCallback() { },
       true
     );
+  }
+
+  private closeModal() {
+    if (this.isFunction(this.closeCallback))
+      this.closeCallback();
   }
   renderTagsHolder() {
     let self = this;
@@ -322,7 +329,7 @@ export class Common extends GridLayout {
     button.className = "btn btn-primary btn-filter-select";
     button.on(
       Button.tapEvent,
-      function(eventData) {
+      function (eventData) {
         if (self.disabled == false) {
           self.open();
         }
@@ -411,12 +418,36 @@ export class Common extends GridLayout {
         selected: self.selected[0]
       });
 
-    self.closeCallback();
-    setTimeout(function() {
+    self.closeModal();
+    setTimeout(function () {
+      if(self.searchBar)
       self.searchBar.text = "";
     }, 500);
   }
+  public Clear(clear =true) {
+    let self = this;
+    if(clear)
+    self.selected_items=[];
+    if (this.multiple == false)
+      if (self.render == "tags") {
+        self.selected_items.splice(0, self.selected_items.length)
+        self.doneSelect();
+      } else {
+        self.selected.splice(0, self.selected.length)
+        self.labelselect.text = self.hint;
+        self.labelselect.className = "filter-select-label fa hint";
+        self.closeModal();
+        self.notify({
+          eventName: Common.changeEvent,
+          object: self,
+          selected: self.selected
+        });
+      }
+    else
+      if (self.selected.length) self.doneSelect();
 
+
+  }
   private clearSelect() {
     //after remove tag
     var self = this;
@@ -452,7 +483,7 @@ export class Common extends GridLayout {
 
     this.selected_items = this.selected;
     listView.itemTemplate = this.item_template;
-    listView.on(ListView.itemLoadingEvent, function(args: any) {
+    listView.on(ListView.itemLoadingEvent, function (args: any) {
       var selected = self.selected_items.filter(item => {
         return (
           item[self.primary_key] ==
@@ -462,14 +493,14 @@ export class Common extends GridLayout {
       if (selected.length) args.view.className = "item filter-select-selected";
       else args.view.className = "item";
     });
-    listView.on("itemTap", function(args) {
+    listView.on("itemTap", function (args) {
       if (
         self.multiple == false &&
         args.view.className == "item filter-select-selected"
       )
         return 0;
-      if (self.multiple == false) 
-      self.selected_items.splice(0,self.selected_items.length);
+      if (self.multiple == false)
+        self.selected_items.splice(0, self.selected_items.length);
       if (args.view.className != "item filter-select-selected") {
         args.view.className = "item filter-select-selected";
         if (self.selected_flag)
@@ -480,14 +511,14 @@ export class Common extends GridLayout {
           args.view.bindingContext[self.selected_flag] = false;
       }
 
-      var selected = self.selected_items.filter(function(item, index) {
+      var selected = self.selected_items.filter(function (item, index) {
         return (
           args.view.bindingContext[self.primary_key] == item[self.primary_key]
         );
       });
       if (!selected.length) self.selected_items.push(args.view.bindingContext);
       else
-        self.selected_items = self.selected_items.filter(function(item, index) {
+        self.selected_items = self.selected_items.filter(function (item, index) {
           return (
             args.view.bindingContext[self.primary_key] != item[self.primary_key]
           );
@@ -506,9 +537,9 @@ export class Common extends GridLayout {
     label.className = "action-bar-title filter-select-modal-title text-center";
     closebtn.text = self.closeText;
     closebtn.className = "action-item filter-select-modal-left text-left";
-    closebtn.on("tap", function(args) {
-      self.selected_items.splice(0,self.selected_items.length)
-      self.closeCallback();
+    closebtn.on("tap", function (args) {
+      self.selected_items.splice(0, self.selected_items.length)
+      self.closeModal();
     });
     if (this.multiple == false) donebtn.text = self.clearText;
     else donebtn.text = self.doneText;
@@ -526,32 +557,12 @@ export class Common extends GridLayout {
     GridLayout.setColumn(label, 1);
     GridLayout.setColumn(donebtn, 2);
     gridLayout.className = "action-bar p-10";
-    if (this.multiple == false)
-      donebtn.on("tap", function(args) {
-        if (self.render == "tags") {
-          self.selected_items.splice(0,self.selected_items.length)
-          self.doneSelect();
-        } else {
-          self.selected.splice(0,self.selected.length)
-          self.labelselect.text = self.hint;
-          self.labelselect.className = "filter-select-label fa hint";
-          self.closeCallback();
-          self.notify({
-            eventName: Common.changeEvent,
-            object: self,
-            selected: self.selected
-          });
-        }
-      });
-    else
-      donebtn.on("tap", function(args) {
-        if (self.selected.length) self.doneSelect();
-      });
-
+    donebtn.on("tap", function (args) {
+      self.Clear(false);
+    });
     stackLayout.addChild(gridLayout);
-
     this.searchBar = new SearchBar();
-    this.searchBar.id="filter-select-search-bar"
+    this.searchBar.id = "filter-select-search-bar"
     this.searchBar.hint = this.searchHint;
     var searchBindingOptions = {
       sourceProperty: "onSubmit",
@@ -567,7 +578,7 @@ export class Common extends GridLayout {
     this.searchBar.bind(searchBindingOptions2, this);
     if (this.allowSearch) stackLayout.addChild(this.searchBar);
     this.searchBar.className = "filter-select-search-bar";
-    
+
     var hr = new StackLayout();
     hr.className = "hr-light";
     stackLayout.addChild(hr);
@@ -575,25 +586,24 @@ export class Common extends GridLayout {
     stackLayout.addChild(listView);
     listView.className = "filter-select-list";
     this.modalPage.content = stackLayout;
-    this.modalPage.on("loaded", function(args) {
-      let page = <StackLayout> args.object;
-      let myFilterSelectSearchbar = <SearchBar> page.getViewById('filter-select-search-bar');
-      if(isAndroid && self.autofocus == false && self.allowSearch)
-      {
+    this.modalPage.on("loaded", function (args) {
+      let page = <StackLayout>args.object;
+      let myFilterSelectSearchbar = <SearchBar>page.getViewById('filter-select-search-bar');
+      if (isAndroid && self.autofocus == false && self.allowSearch) {
         myFilterSelectSearchbar.android.clearFocus();
       }
 
-      if(!isAndroid && self.autofocus == true && self.allowSearch){
+      if (!isAndroid && self.autofocus == true && self.allowSearch) {
         myFilterSelectSearchbar.focus();
       }
 
     });
-    this.modalPage.on("showingModally", function(args) {
+    this.modalPage.on("showingModally", function (args) {
       self.selected_items = self.selected;
       self.closeCallback = args.closeCallback;
-  
-    
-   
+
+
+
     });
     this.listnToSearch();
     return this.modalPage;
@@ -602,7 +612,7 @@ export class Common extends GridLayout {
   public onSubmit() {
     var self = this;
     new Promise((resolve, reject) => {
-      var result = this.items.filter(function(item) {
+      var result = this.items.filter(function (item) {
         return (
           item[self.search_param]
             .toLowerCase()
@@ -637,13 +647,13 @@ export class Common extends GridLayout {
   }
 
   private parseOptions(view, options) {
-    Object.keys(options).forEach(function(key, index) {
+    Object.keys(options).forEach(function (key, index) {
       if (key === "rows")
-        options[key].forEach(function(value, index) {
+        options[key].forEach(function (value, index) {
           view.addRow(new ItemSpec(1, <GridUnitType>value));
         });
       else if (key === "columns")
-        options[key].forEach(function(value, index) {
+        options[key].forEach(function (value, index) {
           view.addColumn(new ItemSpec(1, <GridUnitType>value));
         });
       else {

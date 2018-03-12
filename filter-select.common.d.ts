@@ -48,15 +48,18 @@ export declare class Common extends GridLayout {
     items: any[];
     primary_key: any;
     constructor();
+    private isFunction(functionToCheck);
     renderTags(): FlexboxLayout;
     init(): void;
     open(): void;
+    private closeModal();
     renderTagsHolder(): GridLayout;
     tagsDone(): void;
     labelDone(): void;
     tagsClear(): void;
     refresh(): void;
     private doneSelect();
+    Clear(clear?: boolean): void;
     private clearSelect();
     private modal();
     onSubmit(): void;
