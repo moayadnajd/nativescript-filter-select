@@ -51,7 +51,7 @@ export class Common extends GridLayout {
   public selectText: string = "Select";
   public closeText: string = "Close";
   public static changeEvent: string = "change";
-
+  public static closeEvent: string = "close";
   public get selected_flag(): string {
     return this._selected_flag;
   }
@@ -319,8 +319,15 @@ export class Common extends GridLayout {
   }
 
   private closeModal() {
-    if (this.isFunction(this.closeCallback))
+    if (this.isFunction(this.closeCallback)){
       this.closeCallback();
+      this.notify({
+        eventName: Common.closeEvent,
+        object: this,
+        selected: this.selected_items
+      });
+    }
+    
   }
   renderTagsHolder() {
     let self = this;

@@ -33,6 +33,7 @@ export declare class Common extends GridLayout {
     selectText: string;
     closeText: string;
     static changeEvent: string;
+    static closeEvent: string;
     selected_flag: string;
     search_param: string;
     filterd: ObservableArray<any>;

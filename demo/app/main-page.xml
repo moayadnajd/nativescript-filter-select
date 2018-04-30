@@ -9,7 +9,7 @@
   <Button tap="{{ clear }}"  text="Clear"  />
      <Label class="h2" text="select default" textWrap="true" />
      <StackLayout class="hr-light m-10" />
-     <FS:FilterSelect items="{{ remote_countries }}" searchHint="Search for an item search hint" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code"  change="{{ onSelect }}"  />
+     <FS:FilterSelect close="{{ closeModal }}" items="{{ remote_countries }}" searchHint="Search for an item search hint" hint="Please select some countries" modal_title="Countries" search_param="name" primary_key="code"  change="{{ onSelect }}"  />
      
     
      <Label class="m-t-20 h2" text="Select with pre selected items" textWrap="true" />

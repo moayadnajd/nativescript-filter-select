@@ -68,6 +68,10 @@ export class HelloWorldModel extends Observable {
     }, 3000)
 
   }
+
+  public closeModal(args){
+    console.log('on close selected array is => ' + JSON.stringify(args.selected));
+  }
   public clear() {
     let myFilterSelectToClear = <any>this.page.getViewById('myFilterSelectToClear');
     myFilterSelectToClear.Clear();

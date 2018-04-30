@@ -91,6 +91,7 @@ elementRegistryModule.registerElement("FilterSelect", () => require("nativescrip
 |selectText| select button text | "Select"
 | autofocus | keyboard up when you open modal so you can start search | false
 | open() | open modal programmatically | function
+|close| close event  treger when modal is closed  | you can get the selected array by `args.selected` if the modal closed without any selection the array will be empty  
 
 
 ### CSS core-theme styles is required for modal page if you dont have them just make your own 
