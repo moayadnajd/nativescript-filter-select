@@ -43,8 +43,9 @@ Sample 1 |  Sample 2
 
 ```JAVASCRIPT
 
-import * as elementRegistryModule from 'nativescript-angular/element-registry';
-elementRegistryModule.registerElement("FilterSelect", () => require("nativescript-filter-select").FilterSelect);
+import { registerElement } from 'nativescript-angular/element-registry';
+import { FilterSelect } from 'nativescript-filter-select';
+registerElement('FilterSelect', () => FilterSelect);
 
 ```
 
