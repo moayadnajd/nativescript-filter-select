@@ -53,7 +53,7 @@ export declare class Common extends GridLayout {
     renderTags(): FlexboxLayout;
     init(): void;
     open(): void;
-    private closeModal();
+    closeModal(): void;
     renderTagsHolder(): GridLayout;
     tagsDone(): void;
     labelDone(): void;
@@ -62,7 +62,7 @@ export declare class Common extends GridLayout {
     private doneSelect();
     Clear(clear?: boolean): void;
     private clearSelect();
-    private modal();
+    private Modal();
     onSubmit(): void;
     private listnToSearch();
     private parseOptions(view, options);

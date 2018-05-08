@@ -311,14 +311,14 @@ export class Common extends GridLayout {
     let self = this;
     self.currentPage = frame.topmost().currentPage;
     self.currentPage.showModal(
-      self.modal(),
+      self.Modal(),
       "",
       function closeCallback() { },
       true
     );
   }
 
-  private closeModal() {
+  public closeModal() {
     if (this.isFunction(this.closeCallback)){
       this.closeCallback();
       this.notify({
@@ -473,7 +473,7 @@ export class Common extends GridLayout {
         selected: self.selected[0]
       });
   }
-  private modal() {
+  private Modal() {
     var self = this;
     var stackLayout = new StackLayout();
     var gridLayout = new GridLayout();
@@ -605,11 +605,9 @@ export class Common extends GridLayout {
       }
 
     });
-    this.modalPage.on("showingModally", function (args) {
+    this.modalPage.on("showingModally",  (args:any) => {
       self.selected_items = self.selected;
       self.closeCallback = args.closeCallback;
-
-
 
     });
     this.listnToSearch();

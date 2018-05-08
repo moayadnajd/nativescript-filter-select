@@ -35,3 +35,5 @@ demo-webpack/platforms
 demo-webpack/node_modules
 demo-webpack/app/vendor*
 demo-webpack/report
+
+.tmp_backup
