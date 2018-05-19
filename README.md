@@ -13,7 +13,7 @@ Sample 1 |  Sample 2
 ![Sample1](http://codeobia.com/screenshots/filter-label.gif) | ![Sample2](http://codeobia.com/screenshots/ios-filter-select.gif)
 ## Installation
 
-##### NativeScript 3.x
+##### NativeScript 4.x
 - `tns plugin add nativescript-filter-select`
 
 ## import css  
