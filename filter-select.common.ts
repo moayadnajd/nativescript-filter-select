@@ -2,7 +2,7 @@ import { stack } from "tns-core-modules/ui/frame";
 import { AbsoluteLayout } from "tns-core-modules/ui/layouts/absolute-layout/absolute-layout";
 import { Observable } from "tns-core-modules/data/observable";
 import * as app from "tns-core-modules/application";
-import { LayoutBase } from "tns-core-modules/ui/layouts/layout-base";
+import { LayoutBase, CSSType } from "tns-core-modules/ui/layouts/layout-base";
 import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
 import { StackLayout } from "tns-core-modules/ui/layouts/stack-layout";
 import { FlexboxLayout } from "tns-core-modules/ui/layouts/flexbox-layout";
@@ -15,10 +15,11 @@ import { Repeater } from "tns-core-modules/ui/repeater";
 import { ItemSpec } from "tns-core-modules/ui/layouts/grid-layout";
 import { ListView } from "tns-core-modules/ui/list-view";
 import { Page } from "tns-core-modules/ui/page";
-var frame = require("tns-core-modules/ui/frame");
+import * as frame from "tns-core-modules/ui/frame";
 import { TextView } from "tns-core-modules/ui/text-view";
 import { isAndroid } from "tns-core-modules/platform";
 
+@CSSType("FilterSelect")
 export class Common extends GridLayout {
   public searchHint = "Search for item";
   public searchBar: SearchBar;
@@ -361,6 +362,10 @@ export class Common extends GridLayout {
   }
 
   public tagsDone() {
+    if (!this.filterselect) {
+      return;
+    }
+    
     let self = this;
     self.filterselect.removeChild(self.selected_layout);
     var tags = self.renderTags();
@@ -376,6 +381,10 @@ export class Common extends GridLayout {
     });
   }
   public labelDone() {
+    if (!this.labelselect) {
+      return;
+    }
+
     let self = this;
     if (self.selected.length > 0) {
       this.labelselect.text = self.selected[0][this.search_param];
