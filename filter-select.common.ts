@@ -311,12 +311,10 @@ export class Common extends GridLayout {
   public open() {
     let self = this;
     self.currentPage = frame.topmost().currentPage;
-    self.currentPage.showModal(
-      self.Modal(),
-      "",
-      function closeCallback() { },
-      true
-    );
+    let options = {
+      fullscreen: true
+    };
+    self.currentPage.showModal(self.Modal(), options);
   }
 
   public closeModal() {
@@ -327,6 +325,7 @@ export class Common extends GridLayout {
         object: this,
         selected: this.selected_items
       });
+      this.modalPage = new Page();
     }
     
   }
