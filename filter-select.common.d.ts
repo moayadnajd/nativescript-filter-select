@@ -49,7 +49,7 @@ export declare class Common extends GridLayout {
     items: any[];
     primary_key: any;
     constructor();
-    private isFunction(functionToCheck);
+    private isFunction;
     renderTags(): FlexboxLayout;
     init(): void;
     open(): void;
@@ -59,11 +59,11 @@ export declare class Common extends GridLayout {
     labelDone(): void;
     tagsClear(): void;
     refresh(): void;
-    private doneSelect();
+    private doneSelect;
     Clear(clear?: boolean): void;
-    private clearSelect();
-    private Modal();
+    private clearSelect;
+    private Modal;
     onSubmit(): void;
-    private listnToSearch();
-    private parseOptions(view, options);
+    private listnToSearch;
+    private parseOptions;
 }
